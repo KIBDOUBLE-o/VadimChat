@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="icon.ico" type="image/png">
+</head>
+<style>
+    /* source:style_main */
+
+    body {
+        background: linear-gradient(135deg, #0c0c0e 0%, #1a1a2e 50%, #16213e 100%);
+        color: white;
+        font-family: 'Inter', 'JetBrains Mono', monospace;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Эффект градиентной сетки на фоне */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(0, 122, 204, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(155, 89, 182, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 40% 80%, rgba(52, 152, 219, 0.06) 0%, transparent 40%);
+        z-index: -1;
+    }
+
+    /* Тонкая сетка */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    /* Сообщения чата */
+    .message {
+        margin: 10px 0;
+        max-width: 70%;
+        clear: both;
+        animation: messageFadeIn 0.4s ease forwards;
+        transform-origin: bottom;
+    }
+
+    /* Имя отправителя */
+    .name {
+        font-size: 12px;
+        color: #aaa;
+        margin-bottom: 2px;
+        text-shadow: 0 0 2px #000;
+    }
+
+    /* Мои сообщения с glassmorphism */
+    .bubble-me {
+        background: rgba(0, 122, 204, 0.25);
+        backdrop-filter: blur(8px) saturate(150%);
+        border: 1px solid rgba(0, 122, 204, 0.5);
+        padding: 12px 16px;
+        border-radius: 18px 18px 4px 18px;
+        color: white;
+        float: right;
+        box-shadow: 0 4px 16px rgba(0, 122, 204, 0.4);
+        word-break: break-word;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        white-space: pre-wrap; /* сохраняет переносы строк */
+    }
+
+    .bubble-me:hover {
+        transform: scale(1.03) rotate(-1deg);
+        box-shadow: 0 6px 20px rgba(0, 122, 204, 0.6);
+    }
+
+    /* Сообщения других с glassmorphism */
+    .bubble-other {
+        background: rgba(60, 63, 65, 0.25);
+        backdrop-filter: blur(8px) saturate(150%);
+        border: 1px solid rgba(60, 63, 65, 0.5);
+        padding: 12px 16px;
+        border-radius: 18px 18px 18px 4px;
+        color: white;
+        float: left;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        word-break: break-word;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        white-space: pre-wrap; /* сохраняет переносы строк */
+    }
+
+    .bubble-other:hover {
+        transform: scale(1.03) rotate(1deg);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Сообщения сервера */
+    .bubble-server {
+        background: rgba(0, 179, 0, 0.25);
+        backdrop-filter: blur(8px) saturate(150%);
+        border: 1px solid rgba(0, 128, 0, 0.5);
+        padding: 12px 16px;
+        border-radius: 16px;
+        color: white;
+        margin: 0 auto;
+        text-align: center;
+        float: none;
+        box-shadow: 0 4px 16px rgba(0,128,0,0.4);
+        white-space: pre-wrap; /* сохраняет переносы строк */
+    }
+
+    /* Анимация появления сообщений */
+    @keyframes messageFadeIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.2) translateY(0px);
+        }
+        60% {
+            transform: scale(1.05) translateY(0px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    /* Скроллбар под стиль */
+    #messages {
+        height: calc(100vh - 130px);
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    #messages::-webkit-scrollbar {
+        width: 10px;
+    }
+    #messages::-webkit-scrollbar-track {
+        background: #2b2b2b;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+    }
+    #messages::-webkit-scrollbar-thumb {
+        background: linear-gradient(145deg, #007acc, #005f99);
+        border-radius: 5px;
+        box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    #messages::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(145deg, #008be0, #006fbf);
+        transform: scale(1.05);
+    }
+
+    #inputbar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #2b2b2b;
+        padding: 10px;
+        display: none;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    input[type=text] {
+        width: 80%;
+        padding: 8px;
+        border: none;
+        border-radius: 6px;
+        background: #3c3f41;
+        color: white;
+        font-size: 14px;
+        transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type=text]:focus {
+        background: #4a4d4f;
+        outline: none;
+        box-shadow: 0 0 6px #007acc;
+    }
+
+    /* Общие кнопки */
+    button {
+        background: linear-gradient(145deg, #007a99, #005f55);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    button:hover {
+        background: linear-gradient(145deg, #008ba0, #006f3a);
+        box-shadow: 0 0 10px #007acc;
+        transform: translateY(-2px);
+    }
+
+    button:active {
+        transform: translateY(1px);
+        box-shadow: 0 0 5px #004f80 inset;
+    }
+
+    /* ОБНОВЛЕННЫЙ КОНТЕЙНЕР ДЛЯ КНОПОК НАСТРОЕК, ПЛАГИНОВ И СЕРВЕРОВ */
+    .top-right-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1000;
+    }
+
+    /* Стиль для кнопок в колонке с подсказками */
+    .top-button {
+        all: unset; /* убираем наследование стандартных стилей */
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+        background: #3c3f41;
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    /* Подсказка для кнопок */
+    .top-button::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(40, 40, 50, 0.9);
+        backdrop-filter: blur(8px);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1001;
+        pointer-events: none;
+    }
+
+    /* Стрелочка подсказки */
+    .top-button::before {
+        content: '';
+        position: absolute;
+        right: 42px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 6px solid transparent;
+        border-left-color: rgba(40, 40, 50, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1002;
+        pointer-events: none;
+    }
+
+    /* Показываем подсказку при наведении */
+    .top-button:hover::after,
+    .top-button:hover::before {
+        opacity: 1;
+        visibility: visible;
+        right: 55px;
+    }
+
+    .top-button:hover {
+        background: #4a4d4f;
+        box-shadow: 0 0 10px #007acc;
+        transform: translateX(-5px);
+    }
+
+    .top-button:active {
+        transform: scale(0.95) translateX(-5px);
+        box-shadow: 0 0 4px #005f99 inset;
+    }
+
+    /* Специфические стили для каждой кнопки */
+    #settingsBtn {
+        /* Стили уже определены в классе top-button */
+    }
+
+    #pluginsTopBtn {
+        /* Стили уже определены в классе top-button */
+    }
+
+    #serversTopBtn {
+        /* Стили уже определены в классе top-button */
+    }
+
+    #menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+        position: relative; /* Для позиционирования внутренних абсолютных элементов */
+    }
+
+    #menu h2 {
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 122, 204, 0.7);
+    }
+
+    /* Общие кнопки в меню */
+    #menu button {
+        width: 220px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    /* Исключение — кнопки в верхнем правом углу не должны масштабироваться */
+    #menu .top-button {
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 50% !important;
+        background: #3c3f41 !important;
+        font-size: 20px !important;
+        box-shadow: 0 0 6px rgba(0,0,0,0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    /* Подсказки в меню */
+    #menu .top-button::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(40, 40, 50, 0.9);
+        backdrop-filter: blur(8px);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1001;
+    }
+
+    #menu .top-button::before {
+        content: '';
+        position: absolute;
+        right: 42px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 6px solid transparent;
+        border-left-color: rgba(40, 40, 50, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1002;
+    }
+
+    #menu .top-button:hover::after,
+    #menu .top-button:hover::before {
+        opacity: 1;
+        visibility: visible;
+        right: 55px;
+    }
+
+    #menu .top-button:hover {
+        background: #4a4d4f !important;
+        box-shadow: 0 0 10px #007acc;
+        transform: translateX(-5px);
+    }
+
+    #menu .top-button:active {
+        transform: scale(0.95) translateX(-5px);
+        box-shadow: 0 0 4px #005f99 inset;
+    }
+
+    #menu input {
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 6px;
+        background: #3c3f41;
+        color: white;
+        width: 200px;
+        transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #menu input:focus {
+        background: #4a4d4f;
+        box-shadow: 0 0 6px #007acc;
+        outline: none;
+    }
+
+    #settingsMenu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #1e1e1e;
+        color: white;
+        z-index: 10000;
+        overflow: auto;
+        padding: 20px;
+        box-sizing: border-box;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    #joinForm {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        flex-direction: column;
+        align-items: center;
+        z-index: 100;
+    }
+
+    /* ОБНОВЛЕННЫЙ СТИЛЬ ДЛЯ DEBUG ПАНЕЛИ */
+    #debugPanel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 320px;
+        background: rgba(25, 25, 35, 0.95);
+        border-left: 1px solid rgba(0, 122, 204, 0.3);
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+        animation: slideInRight 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes slideInRight {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+
+    #debugHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg,
+            rgba(0, 122, 204, 0.8),
+            rgba(0, 97, 153, 0.7));
+        color: white;
+        padding: 10px 15px;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #debugHeader button {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    #debugHeader button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+
+    #debugMessages {
+        flex-grow: 1;
+        padding: 15px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        overflow-y: auto;
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(20, 20, 25, 0.4);
+        scrollbar-width: thin;
+        scrollbar-color: #007acc rgba(30, 30, 40, 0.8);
+    }
+
+    #debugMessages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #debugMessages::-webkit-scrollbar-track {
+        background: rgba(30, 30, 40, 0.8);
+        border-radius: 3px;
+    }
+
+    #debugMessages::-webkit-scrollbar-thumb {
+        background: linear-gradient(145deg,
+            rgba(0, 122, 204, 0.8),
+            rgba(0, 97, 153, 0.7));
+        border-radius: 3px;
+    }
+
+    #debugInputBar {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(30, 30, 40, 0.8);
+        backdrop-filter: blur(5px);
+    }
+
+    #debugInputBar input {
+        flex-grow: 1;
+        background: rgba(40, 40, 50, 0.6);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        transition: all 0.2s ease;
+    }
+
+    #debugInputBar input:focus {
+        background: rgba(50, 50, 60, 0.7);
+        border-color: rgba(0, 122, 204, 0.5);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+    }
+
+    #debugInputBar button {
+        background: linear-gradient(145deg,
+            rgba(0, 122, 204, 0.8),
+            rgba(0, 97, 153, 0.7));
+        border: none;
+        margin-left: 8px;
+        border-radius: 6px;
+        padding: 8px 15px;
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s ease;
+    }
+
+    #debugInputBar button:hover {
+        background: linear-gradient(145deg,
+            rgba(0, 140, 230, 0.9),
+            rgba(0, 115, 180, 0.8));
+        transform: translateY(-1px);
+    }
+
+    .debug-line {
+        margin: 5px 0;
+        word-break: break-word;
+        line-height: 1.4;
+        padding: 3px 5px;
+        border-radius: 3px;
+        transition: background 0.2s ease;
+    }
+
+    .debug-line:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .debug-line.info {
+        color: #4fc3f7;
+    }
+
+    .debug-line.error {
+        color: #ff6b6b;
+    }
+
+    .debug-line.warn {
+        color: #ffca28;
+    }
+
+    .debug-line.command {
+        color: #69f0ae;
+    }
+
+    /* ОБНОВЛЕННАЯ КНОПКА DEBUG - БОЛЕЕ "ВСТРОЕННАЯ" */
+    #toggleDebugBtn {
+        position: fixed;
+        right: 20px;
+        bottom: 70px;
+        width: 44px;
+        height: 44px;
+        background: rgba(40, 40, 50, 0.7);
+        backdrop-filter: blur(6px);
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        z-index: 5000;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #toggleDebugBtn:hover {
+        background: rgba(50, 50, 60, 0.8);
+        border-color: rgba(0, 122, 204, 0.4);
+        box-shadow:
+            0 6px 16px rgba(0, 122, 204, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        color: #4fc3f7;
+    }
+
+    #toggleDebugBtn:active {
+        transform: translateY(0);
+        box-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    #leaveBtn {
+        position: fixed;
+        top: 5px;
+        right: 10px;  /* чтобы не налезать на кнопку настроек */
+        background: linear-gradient(145deg, #d9534f, #b52a2a);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+        z-index: 100000;
+        font-weight: 700;
+    }
+
+    #leaveBtn:hover {
+        background: linear-gradient(145deg, #e06a6a, #c02f2f);
+        transform: translateY(-2px);
+    }
+
+    #leaveBtn:active {
+        transform: translateY(1px);
+        box-shadow: 0 0 5px rgba(0,0,0,0.35) inset;
+    }
+
+    /* Кнопка всегда сверху */
+    #minimizeBtn {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+        font-weight: bold;
+        background: rgba(0,0,0,0.15);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        z-index: 100000;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    #minimizeBtn:hover {
+        background: rgba(0,0,0,0.5);
+        transform: scale(1.1);
+    }
+
+    #minimizeBtn:active {
+        transform: scale(0.95);
+    }
+
+    #versionText {
+        font-size: 13px;
+        color: #aaa;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 4px #000;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+    }
+
+    #versionText:hover {
+        opacity: 1;
+        color: #00b7ff;
+    }
+
+    #pluginsMenu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #1e1e1e;
+        color: white;
+        z-index: 10000;
+        overflow: auto;
+        padding: 20px;
+        box-sizing: border-box;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .plugin-item {
+        background: rgba(60, 63, 65, 0.3);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(90, 90, 90, 0.5);
+        border-radius: 12px;
+        padding: 15px;
+        margin: 10px 0;
+        transition: all 0.3s ease;
+    }
+
+    .plugin-item:hover {
+        background: rgba(70, 73, 75, 0.4);
+        border-color: rgba(0, 122, 204, 0.6);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+    }
+
+    .plugin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .plugin-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #007acc;
+    }
+
+    .plugin-description {
+        color: #ccc;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .plugin-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .plugin-toggle {
+        background: linear-gradient(145deg, #28a745, #1e7e34);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .plugin-toggle:hover {
+        background: linear-gradient(145deg, #34ce57, #23923d);
+    }
+
+    .plugin-toggle.disabled {
+        background: linear-gradient(145deg, #6c757d, #545b62);
+    }
+
+    .plugin-settings {
+        background: linear-gradient(145deg, #007acc, #005f99);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .plugin-settings:hover {
+        background: linear-gradient(145deg, #008be0, #006fbf);
+    }
+
+    .plugin-version {
+        font-size: 12px;
+        color: #888;
+        margin-left: 10px;
+    }
+
+    .plugin-author {
+        font-size: 12px;
+        color: #aaa;
+        font-style: italic;
+    }
+
+    .server-item {
+        background: linear-gradient(135deg, rgba(50,50,50,0.9), rgba(30,30,30,0.9));
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.08);
+        cursor: pointer;
+        font-size: 18px;
+        color: white;
+        transition: 0.25s;
+        box-shadow: 0 0 0 rgba(0,150,255,0);
+    }
+
+    .server-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,150,255,0.25);
+        border-color: rgba(0,150,255,0.4);
+    }
+
+    @keyframes fadeIn {
+        from { opacity:0; }
+        to { opacity:1; }
+    }
+
+    @keyframes scaleIn {
+        from { transform: scale(0.95); opacity:0; }
+        to { transform: scale(1); opacity:1; }
+    }
+</style>
+<body>
+    <!-- source:body_main -->
+
+    <button id="minimizeBtn">−</button>
+
+    <div id="menu">
+        <h2>Vadim Chat</h2>
+        <div id="versionText">ERROR</div>
+        <button id="createBtn">Создать комнату</button>
+        <button id="joinBtn">Подключиться</button>
+        <button id="reconnectBtn">Подключиться к недавней</button>
+
+        <!-- Контейнер для кнопок в правом верхнем углу ВНУТРИ МЕНЮ -->
+        <div class="top-right-buttons">
+            <button id="settingsBtn" class="top-button" data-tooltip="Настройки">⚙️</button>
+            <button id="pluginsTopBtn" class="top-button" data-tooltip="Плагины">🔌</button>
+            <button id="serversTopBtn" class="top-button" data-tooltip="Сервера">🌐</button>
+        </div>
+        <!-- source:body_menu -->
+    </div>
+
+    <!-- Добавляем меню плагинов -->
+    <div id="pluginsMenu">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>Управление плагинами</h2>
+            <button id="closePluginsBtn" style="background:#cc0000;">✖</button>
+        </div>
+
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+                <button id="pluginsTabActive">Активные</button>
+                <button id="pluginsTabAll">Все плагины</button>
+                <button id="pluginsTabStore">Магазин плагинов</button>
+            </div>
+            <button id="refreshPluginsBtn">Обновить</button>
+        </div>
+
+        <div id="pluginsList" style="margin-top:20px;">
+            <!-- Плагины будут добавляться сюда динамически -->
+        </div>
+    </div>
+
+    <div id="serversMenu" style="
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.85);
+        backdrop-filter:blur(6px);
+        z-index:10000;
+        padding:40px;
+        box-sizing:border-box;
+        overflow:auto;
+        animation: fadeIn 0.4s ease;
+        color:white;
+        font-family:'Segoe UI', sans-serif;
+    ">
+
+        <div style="
+            max-width:600px;
+            margin:auto;
+            background:rgba(30,30,30,0.8);
+            border:1px solid rgba(255,255,255,0.1);
+            padding:30px;
+            border-radius:16px;
+            box-shadow:0 0 25px rgba(0,0,0,0.4);
+            animation: scaleIn 0.35s ease;
+        ">
+
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="margin:0; font-size:26px; font-weight:600;">🔗 Серверы</h2>
+
+                <button id="closeServersBtn" style="
+                    background:#ff2e2e;
+                    border:none;
+                    padding:8px 14px;
+                    font-size:18px;
+                    border-radius:8px;
+                    cursor:pointer;
+                    transition:0.2s;
+                ">✖</button>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button id="refreshServersBtn" style="
+                    flex:1;
+                    background:#0078ff;
+                    padding:10px;
+                    border:none;
+                    border-radius:10px;
+                    cursor:pointer;
+                    font-size:16px;
+                    transition:0.25s;
+                ">🔄 Обновить</button>
+
+                <button id="clearServersBtn" style="
+                    flex:1;
+                    background:#6b6b6b;
+                    padding:10px;
+                    border:none;
+                    border-radius:10px;
+                    cursor:pointer;
+                    font-size:16px;
+                    transition:0.25s;
+                ">🗑 Очистить</button>
+            </div>
+
+            <div id="serversList" style="
+                margin-top:25px;
+                display:flex;
+                flex-direction:column;
+                gap:12px;
+            ">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="settingsMenu">
+        <!-- source:body_settings -->
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>Настройки</h2>
+            <button id="closeSettingsBtn" style="background:#cc0000;">✖</button>
+        </div>
+
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+                <button id="basicTab">Обычные</button>
+                <button id="advancedTab">Расширенные</button>
+            </div>
+            <button id="applySettingsBtn">Применить</button>
+        </div>
+
+        <div id="basicSettings" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;"></div>
+        <div id="advancedSettings" style="margin-top:20px; display:none; flex-direction:column; gap:10px;"></div>
+    </div>
+
+    <div id="joinForm" style="display:none; flex-direction:column; align-items:center;">
+        <!-- source:body_join -->
+        <input type="text" id="joinKey" placeholder="Введите ключ">
+        <input type="text" id="joinName" placeholder="Введите имя">
+        <button id="connectBtn">Подключиться</button>
+    </div>
+
+    <div id="chat" style="display:none;">
+        <!-- source:body_chat -->
+        <div id="messages"></div>
+        <div id="inputbar">
+            <input type="text" id="msg" placeholder="Введите сообщение">
+            <button onclick="acceptMessage()">Отправить</button>
+            <button id="toggleDebugBtn">🐞</button>
+            <button id="leaveBtn" onclick="if(confirm('Выйти из чата?')) exitChat();">Выйти</button>
+        </div>
+
+        <div id="debugPanel">
+            <div id="debugHeader">
+                <span>Debug Console</span>
+                <button id="closeDebugBtn">✖</button>
+            </div>
+            <div id="debugMessages"></div>
+            <div id="debugInputBar">
+                <input type="text" id="debugInput" placeholder="Введите команду или сообщение">
+                <button id="debugSendBtn">▶</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // source:script_main
+
+    const debugPanel = document.getElementById("debugPanel");
+    const toggleDebugBtn = document.getElementById("toggleDebugBtn");
+    const closeDebugBtn = document.getElementById("closeDebugBtn");
+    const debugMessages = document.getElementById("debugMessages");
+    const debugInput = document.getElementById("debugInput");
+    const debugSendBtn = document.getElementById("debugSendBtn");
+
+    // Новые элементы для верхних кнопок
+    const pluginsTopBtn = document.getElementById("pluginsTopBtn");
+    const serversTopBtn = document.getElementById("serversTopBtn");
+
+    disableDebug();
+
+    toggleDebugBtn.onclick = () => {
+        debugPanel.style.display = (debugPanel.style.display === "flex") ? "none" : "flex";
+    };
+
+    function setVersion(version) {
+        const versionText = document.getElementById("versionText");
+        if (versionText) {
+            versionText.textContent = "v" + version;
+        }
+    }
+
+    closeDebugBtn.onclick = () => {
+        debugPanel.style.display = "none";
+    };
+
+    function disableDebug() {
+        toggleDebugBtn.style.display = "none";
+    }
+
+    function enableDebug() {
+        toggleDebugBtn.style.display = "flex";
+    }
+
+    function logDebug(message, type = "info") {
+        const div = document.createElement("div");
+        div.classList.add("debug-line");
+        div.classList.add(type);
+        div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        debugMessages.appendChild(div);
+        debugMessages.scrollTop = debugMessages.scrollHeight;
+    }
+
+    debugSendBtn.onclick = () => {
+        const val = debugInput.value.trim();
+        if (!val) return;
+        logDebug(`> ${val}`, "command");
+        debugInput.value = "";
+        // здесь можно обрабатывать команды
+    };
+
+
+    const menu = document.getElementById("menu");
+    const chat = document.getElementById("chat");
+    const inputbar = document.getElementById("inputbar");
+    const joinForm = document.getElementById("joinForm");
+    const createBtn = document.getElementById("createBtn");
+    const joinBtn = document.getElementById("joinBtn");
+    const connectBtn = document.getElementById("connectBtn");
+    const reconnectBtn = document.getElementById("reconnectBtn");
+    const minimizeBtn = document.getElementById("minimizeBtn");
+
+    createBtn.onclick = () => startChat("server");
+    joinBtn.onclick = () => {
+        createBtn.style.display = "none";
+        joinBtn.style.display = "none";
+        reconnectBtn.style.display = "none";
+        joinForm.style.display = "flex";
+    };
+    connectBtn.onclick = () => {
+        joinForm.style.display = "none";
+        const key = document.getElementById("joinKey").value.trim();
+        const name = document.getElementById("joinName").value.trim();
+        if (key && name) startChat("client", { key, name });
+    };
+    reconnectBtn.onclick = () => {
+        window.pywebview.api.reconnect();
+
+        menu.style.display = "none";
+        chat.style.display = "block";
+        inputbar.style.display = "block";
+    };
+
+    minimizeBtn.onclick = () => {
+        window.pywebview.api.minimize();
+    };
+
+    function startChat(mode, data = {}) {
+        menu.style.display = "none";
+        chat.style.display = "block";
+        inputbar.style.display = "block";
+
+        if (mode === "server") {
+            window.pywebview.api.create_chat();
+            addMessage("Вы создали чат. Ожидание подключений...", "server");
+        } else if (mode === "client") {
+            window.pywebview.api.join_chat(data.key, data.name);
+            addMessage(`Подключение к чату с ключом ${data.key}...`, "server");
+        }
+    }
+
+    function setNickName(name) {
+        document.getElementById("joinName").value = name;
+    }
+
+    function closeChat() {
+        menu.style.display = "flex";
+        chat.style.display = "none";
+        inputbar.style.display = "none";
+        createBtn.style.display = "";
+        joinBtn.style.display = "";
+        joinForm.style.display = "none";
+        reconnectBtn.style.display = "block";
+    }
+
+    function exitChat() {
+        clearMessages();
+        closeChat();
+        window.pywebview.api.exit_chat()
+    }
+
+    function scrollToBottom() {
+        const messages = document.getElementById("messages");
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addMessage(text, sender, name="") {
+        const wrap = document.createElement("div");
+        wrap.className = "message";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "name";
+
+        const bubble = document.createElement("div");
+
+        if(sender === "me") {
+            nameDiv.style.textAlign = "right";
+            nameDiv.textContent = name || "Я";
+            bubble.className = "bubble-me";
+        }
+        else if(sender === "server") {
+            nameDiv.style.textAlign = "center";
+            nameDiv.textContent = name || "Сервер";
+            bubble.className = "bubble-server";
+        }
+        else {
+            nameDiv.style.textAlign = "left";
+            nameDiv.textContent = name || "Игрок";
+            bubble.className = "bubble-other";
+        }
+
+        bubble.textContent = text;
+        wrap.appendChild(nameDiv);
+        wrap.appendChild(bubble);
+        document.getElementById("messages").appendChild(wrap);
+
+        setTimeout(scrollToBottom, 200);
+    }
+
+    function acceptMessage() {
+        const inp = document.getElementById("msg");
+        const val = inp.value.trim();
+        if(val) {
+            window.pywebview.api.send_message(val);
+            inp.value = "";
+        }
+    }
+    document.getElementById("msg").addEventListener("keypress", e => {
+        if(e.key === "Enter") acceptMessage();
+    });
+
+    function clearMessages() {
+        const messages = document.getElementById("messages");
+        messages.innerHTML = "";
+    }
+
+    // === DRAG & DROP FILE SUPPORT ===
+    document.addEventListener("dragover", e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+    });
+
+    document.addEventListener("drop", e => {
+        e.preventDefault();
+        if (e.dataTransfer.files.length > 0) {
+            for (let file of e.dataTransfer.files) {
+                const reader = new FileReader();
+                reader.onload = evt => {
+                    const base64 = evt.target.result.split(",")[1]; // убираем data:...;base64,
+                    const fileData = {
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: base64
+                    };
+                    window.pywebview.api.send_file(fileData);
+
+                    addFileMessage(evt.target.result, "me", file.name, "Я");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    function addFileMessage(src, sender, file_name, name = "") {
+        const wrap = document.createElement("div");
+        wrap.className = "message";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "name";
+
+        const bubble = document.createElement("div");
+        bubble.className =
+            sender === "me" ? "bubble-me" :
+            sender === "server" ? "bubble-server" : "bubble-other";
+
+        nameDiv.style.textAlign =
+            sender === "me" ? "right" :
+            sender === "server" ? "center" : "left";
+
+        nameDiv.textContent =
+            sender === "me" ? (name || "Я") :
+            sender === "server" ? (name || "Сервер") :
+            (name || "Игрок");
+
+        const isImage =
+            typeof src === "string" &&
+            (src.startsWith("data:image/") ||
+             /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i.test(src));
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = file_name || "Файл";
+        img.style.maxWidth = "200px";
+        img.style.borderRadius = "12px";
+        img.style.cursor = "pointer";
+        img.title = isImage ? "Открыть изображение" : "Открыть местоположение файла";
+
+        img.onclick = () => {
+            if (isImage) {
+                const overlay = document.createElement("div");
+                overlay.style.position = "fixed";
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = "100vw";
+                overlay.style.height = "100vh";
+                overlay.style.background = "rgba(0,0,0,0.8)";
+                overlay.style.display = "flex";
+                overlay.style.justifyContent = "center";
+                overlay.style.alignItems = "center";
+                overlay.style.zIndex = 9999;
+                overlay.onclick = () => overlay.remove();
+
+                const fullImg = document.createElement("img");
+                fullImg.src = src;
+                fullImg.style.maxWidth = "90%";
+                fullImg.style.maxHeight = "90%";
+                fullImg.style.borderRadius = "12px";
+                fullImg.style.boxShadow = "0 0 20px rgba(0,0,0,0.5)";
+                overlay.appendChild(fullImg);
+                document.body.appendChild(overlay);
+            } else {
+                window.pywebview.api.open_shared_folder("data/shared_assets");
+            }
+        };
+
+        bubble.appendChild(img);
+        wrap.appendChild(nameDiv);
+        wrap.appendChild(bubble);
+        document.getElementById("messages").appendChild(wrap);
+
+        setTimeout(scrollToBottom, 200);
+    }
+
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsMenu = document.getElementById("settingsMenu");
+    const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+    const basicTab = document.getElementById("basicTab");
+    const advancedTab = document.getElementById("advancedTab");
+    const basicSettings = document.getElementById("basicSettings");
+    const advancedSettings = document.getElementById("advancedSettings");
+    const applySettingsBtn = document.getElementById("applySettingsBtn");
+
+    let settings = {};
+    let settingElements = {};
+
+    // Назначаем обработчики для верхних кнопок
+    settingsBtn.onclick = () => settingsMenu.style.display = "block";
+    closeSettingsBtn.onclick = () => settingsMenu.style.display = "none";
+
+    // Обработчик для кнопки плагинов вверху
+    pluginsTopBtn.onclick = () => {
+        pluginsMenu.style.display = "block";
+        loadPlugins();
+    };
+
+    // Обработчик для кнопки серверов вверху
+    serversTopBtn.onclick = () => showServersMenu();
+
+    function activateTab(tab) {
+        if(tab === "basic") {
+            basicSettings.style.display = "flex";
+            advancedSettings.style.display = "none";
+            basicTab.style.background = "#0030cc";
+            advancedTab.style.background = "";
+        } else {
+            basicSettings.style.display = "none";
+            advancedSettings.style.display = "flex";
+            basicTab.style.background = "";
+            advancedTab.style.background = "#0030cc";
+        }
+    }
+    basicTab.onclick = () => activateTab("basic");
+    advancedTab.onclick = () => activateTab("advanced");
+
+    applySettingsBtn.onclick = () => {
+        window.pywebview.api.apply_settings(settings);
+        //settingsMenu.style.display = "none";
+    };
+
+    function addSetting(id, title, default_value, type="field", is_adv=false) {
+        settings[id] = default_value;
+
+        const createInput = () => {
+            const container = document.createElement("div");
+            container.style.display = "flex";
+            container.style.alignItems = "center";
+            container.style.gap = "10px";
+
+            const label = document.createElement("label");
+            label.textContent = title;
+            label.style.flex = "0 0 180px";
+
+            let input;
+            if(type === "toggle") {
+                input = document.createElement("input");
+                input.type = "checkbox";
+                input.checked = default_value;
+                input.onchange = () => {
+                    settings[id] = input.checked;
+                    // обновляем второй input, если есть
+                    if(settingElements[id] && settingElements[id][1] && settingElements[id][1] !== input) {
+                        settingElements[id][1].checked = input.checked;
+                    }
+                };
+                input.style.flex = "0 0 auto";
+            } else {
+                input = document.createElement("input");
+                input.type = "text";
+                input.value = default_value;
+                input.style.flex = "1 1 auto";
+                input.style.background = "#3c3f41";
+                input.style.color = "white";
+                input.style.border = "none";
+                input.style.borderRadius = "6px";
+                input.style.padding = "4px 8px";
+                input.oninput = () => {
+                    settings[id] = input.value;
+                    if(settingElements[id] && settingElements[id][1] && settingElements[id][1] !== input) {
+                        settingElements[id][1].value = input.value;
+                    }
+                };
+            }
+
+            container.appendChild(label);
+            container.appendChild(input);
+            return { container, input };
+        };
+
+        const { container, input } = createInput();
+        let inputs = [input];
+
+        if(is_adv) {
+            advancedSettings.appendChild(container);
+        } else {
+            basicSettings.appendChild(container);
+            const advContainer = container.cloneNode(true);
+            advancedSettings.appendChild(advContainer);
+            const advInput = advContainer.querySelector("input");
+            inputs.push(advInput);
+
+            advInput.oninput = input.oninput;
+            if(input.type === "checkbox") advInput.onchange = input.onchange;
+        }
+
+        settingElements[id] = inputs;
+    }
+
+    function setSetting(id, value) {
+        if(settingElements[id]) {
+            for(const el of settingElements[id]) {
+                if(el.type === "checkbox") el.checked = value;
+                else el.value = value;
+            }
+            settings[id] = value;
+        }
+    }
+
+    addSetting("default_ip", "Стандартный IP", "127.0.0.1", "field", false);
+    addSetting("use_universal", "Использовать универсальный IP", true, "toggle", false);
+    addSetting("port", "Порт", "12345", "field", false);
+
+    addSetting("universal", "Универсальный IP", "0.0.0.0", "field", true);
+    addSetting("buffer_size", "Размер Буффера", "4096", "field", true);
+    addSetting("data_chunk_size", "Размер Куска Данных", "1024", "field", true);
+    addSetting("chunk_sending_rate", "Частота Отправки Кусков", "0.05", "field", true);
+    addSetting("debug_mode", "Режим Отладки", false, "toggle", true);
+
+    activateTab("basic");
+
+
+    // ===== СИСТЕМА ПЛАГИНОВ =====
+
+    const pluginsMenu = document.getElementById("pluginsMenu");
+    const closePluginsBtn = document.getElementById("closePluginsBtn");
+    const pluginsList = document.getElementById("pluginsList");
+    const refreshPluginsBtn = document.getElementById("refreshPluginsBtn");
+    const pluginsTabActive = document.getElementById("pluginsTabActive");
+    const pluginsTabAll = document.getElementById("pluginsTabAll");
+    const pluginsTabStore = document.getElementById("pluginsTabStore");
+
+    let plugins = {};
+    let currentPluginsTab = "active";
+
+    closePluginsBtn.onclick = () => {
+        pluginsMenu.style.display = "none";
+    };
+
+    refreshPluginsBtn.onclick = () => {
+        loadPlugins();
+    };
+
+    pluginsTabActive.onclick = () => activatePluginsTab("active");
+    pluginsTabAll.onclick = () => activatePluginsTab("all");
+    pluginsTabStore.onclick = () => activatePluginsTab("store");
+
+    function activatePluginsTab(tab) {
+        currentPluginsTab = tab;
+        pluginsTabActive.style.background = tab === "active" ? "#0030cc" : "";
+        pluginsTabAll.style.background = tab === "all" ? "#0030cc" : "";
+        pluginsTabStore.style.background = tab === "store" ? "#0030cc" : "";
+
+        renderPluginsList();
+    }
+
+    // Функция для добавления плагина
+    function addPlugin(pluginData) {
+        const pluginId = pluginData.id || `plugin_${Date.now()}`;
+
+        plugins[pluginId] = {
+            id: pluginId,
+            display_name: pluginData.display_name || "Без названия",
+            description: pluginData.description || "Описание отсутствует",
+            version: pluginData.version || "1.0.0",
+            author: pluginData.author || "Неизвестный автор",
+            enabled: pluginData.enabled !== undefined ? pluginData.enabled : true,
+            settings: pluginData.settings || [],
+            onEnable: pluginData.onEnable,
+            onDisable: pluginData.onDisable,
+            onSettings: pluginData.onSettings
+        };
+
+        // Если плагин включен, вызываем его функцию включения
+        if (plugins[pluginId].enabled && plugins[pluginId].onEnable) {
+            try {
+                plugins[pluginId].onEnable();
+            } catch (error) {
+                console.error(`Ошибка при включении плагина ${pluginId}:`, error);
+            }
+        }
+
+        // Обновляем список плагинов если меню открыто
+        if (pluginsMenu.style.display === "block") {
+            renderPluginsList();
+        }
+
+        logDebug("Plugin added");
+        return pluginId;
+    }
+
+    // Функция для загрузки и отображения плагинов
+    function loadPlugins() {
+        // Здесь можно загружать плагины из внешнего источника
+        // Пока просто рендерим существующие
+        renderPluginsList();
+    }
+
+    // Функция для отображения списка плагинов
+    function renderPluginsList() {
+        pluginsList.innerHTML = "";
+
+        const pluginsArray = Object.values(plugins);
+
+        // Фильтрация по текущей вкладке
+        let filteredPlugins = pluginsArray;
+        if (currentPluginsTab === "active") {
+            filteredPlugins = pluginsArray.filter(p => p.enabled);
+        } else if (currentPluginsTab === "store") {
+            // Для магазина можно показать демо-плагины или загрузить из API
+            pluginsList.innerHTML = `
+                <div class="plugin-item">
+                    <div class="plugin-header">
+                        <span class="plugin-name">Магазин плагинов</span>
+                    </div>
+                    <div class="plugin-description">
+                        Функция магазина плагинов в разработке. Скоро здесь можно будет устанавливать новые плагины!
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        if (filteredPlugins.length === 0) {
+            pluginsList.innerHTML = `
+                <div class="plugin-item">
+                    <div class="plugin-description" style="text-align: center;">
+                        ${currentPluginsTab === "active" ?
+                          "Нет активных плагинов" :
+                          "Плагины не найдены"}
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        filteredPlugins.forEach(plugin => {
+            const pluginElement = document.createElement("div");
+            pluginElement.className = "plugin-item";
+
+            pluginElement.innerHTML = `
+                <div class="plugin-header">
+                    <span class="plugin-name">${plugin.display_name}</span>
+                    <div>
+                        <span class="plugin-version">v${plugin.version}</span>
+                        <span class="plugin-author">by ${plugin.author}</span>
+                    </div>
+                </div>
+                <div class="plugin-description">${plugin.description}</div>
+                <div class="plugin-controls">
+                    <button class="plugin-toggle ${plugin.enabled ? '' : 'disabled'}"
+                            onclick="togglePlugin('${plugin.id}')">
+                        ${plugin.enabled ? 'Отключить' : 'Включить'}
+                    </button>
+                    ${plugin.onSettings ? `
+                    <button class="plugin-settings" onclick="openPluginSettings('${plugin.id}')">
+                        Настройки
+                    </button>
+                    ` : ''}
+                    <button style="background: #dc3545;" onclick="removePlugin('${plugin.id}')">
+                        Удалить
+                    </button>
+                </div>
+            `;
+
+            pluginsList.appendChild(pluginElement);
+        });
+    }
+
+    // Функция для переключения состояния плагина
+    function togglePlugin(pluginId) {
+        if (plugins[pluginId]) {
+            plugins[pluginId].enabled = !plugins[pluginId].enabled;
+
+            try {
+                if (plugins[pluginId].enabled) {
+                    if (plugins[pluginId].onEnable) {
+                        plugins[pluginId].onEnable();
+                    }
+                    logDebug(`Плагин "${plugins[pluginId].display_name}" включен`, "info");
+                } else {
+                    if (plugins[pluginId].onDisable) {
+                        plugins[pluginId].onDisable();
+                    }
+                    logDebug(`Плагин "${plugins[pluginId].display_name}" отключен`, "info");
+                }
+            } catch (error) {
+                console.error(`Ошибка при переключении плагина ${pluginId}:`, error);
+                logDebug(`Ошибка в плагине "${plugins[pluginId].display_name}": ${error.message}`, "error");
+            }
+            window.pywebview.api.set_plugin_state(pluginId, plugins[pluginId].enabled);
+            renderPluginsList();
+        }
+    }
+
+    // Функция для открытия настроек плагина
+    function openPluginSettings(pluginId) {
+        if (plugins[pluginId] && plugins[pluginId].onSettings) {
+            try {
+                plugins[pluginId].onSettings();
+            } catch (error) {
+                console.error(`Ошибка при открытии настроек плагина ${pluginId}:`, error);
+                alert(`Ошибка в настройках плагина: ${error.message}`);
+            }
+        }
+    }
+
+    // Функция для удаления плагина
+    function removePlugin(pluginId) {
+        if (plugins[pluginId] && confirm(`Удалить плагин "${plugins[pluginId].display_name}"?`)) {
+            // Вызываем функцию отключения если плагин был включен
+            if (plugins[pluginId].enabled && plugins[pluginId].onDisable) {
+                try {
+                    plugins[pluginId].onDisable();
+                } catch (error) {
+                    console.error(`Ошибка при отключении плагина перед удалением:`, error);
+                }
+            }
+
+            delete plugins[pluginId];
+            renderPluginsList();
+            logDebug(`Плагин удален: ${pluginId}`, "info");
+        }
+    }
+
+    // Функция для получения списка всех плагинов
+    function getPlugins() {
+        return plugins;
+    }
+
+    // Функция для получения конкретного плагина
+    function getPlugin(pluginId) {
+        return plugins[pluginId];
+    }
+
+    // Инициализация вкладки плагинов
+    activatePluginsTab("active");
+
+    function addButtonMessage(text, sender, name = "", id, buttons = []) {
+        if (!Array.isArray(buttons) || buttons.length === 0 || buttons.length > 4) {
+            console.error("buttons must be array of 1–4 strings");
+            return;
+        }
+
+        const wrap = document.createElement("div");
+        wrap.className = "message";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "name";
+
+        const bubble = document.createElement("div");
+        bubble.style.display = "flex";
+        bubble.style.flexDirection = "column";
+        bubble.style.gap = "8px";
+
+        // ----- СТИЛЬ ОТПРАВИТЕЛЯ -----
+        if (sender === "me") {
+            nameDiv.style.textAlign = "right";
+            nameDiv.textContent = name || "Я";
+            bubble.className = "bubble-me";
+        } else if (sender === "server") {
+            nameDiv.style.textAlign = "center";
+            nameDiv.textContent = name || "Сервер";
+            bubble.className = "bubble-server";
+        } else {
+            nameDiv.style.textAlign = "left";
+            nameDiv.textContent = name || "Игрок";
+            bubble.className = "bubble-other";
+        }
+
+        // ----- ТЕКСТ -----
+        const textDiv = document.createElement("div");
+        textDiv.textContent = text;
+        bubble.appendChild(textDiv);
+
+        // ----- БЛОК КНОПОК -----
+        const btnBlock = document.createElement("div");
+        btnBlock.style.display = "flex";
+        btnBlock.style.flexWrap = "wrap";
+        btnBlock.style.gap = "6px";
+        btnBlock.style.marginTop = "4px";
+
+        buttons.forEach((label, index) => {
+            const btn = document.createElement("button");
+            btn.textContent = label;
+            btn.style.flex = "1 1 auto";
+
+            btn.onclick = () => {
+                try {
+                    window.pywebview.api.button_pressed(id, index);
+                } catch (e) {
+                    console.error("buttonPressed error:", e);
+                }
+            };
+
+            btnBlock.appendChild(btn);
+        });
+
+        bubble.appendChild(btnBlock);
+
+        wrap.appendChild(nameDiv);
+        wrap.appendChild(bubble);
+
+        document.getElementById("messages").appendChild(wrap);
+        wrap.scrollIntoView();
+    }
+
+    function sendTable(sender, id, columns, data, name="") {
+        const wrap = document.createElement("div");
+        wrap.className = "message";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "name";
+
+        const bubble = document.createElement("div");
+        bubble.style.overflowX = "auto"; // горизонтальный скролл при длинных таблицах
+
+        // Стили отправителя
+        if(sender === "me") {
+            nameDiv.style.textAlign = "right";
+            nameDiv.textContent = name || "Я";
+            bubble.className = "bubble-me";
+        } else if(sender === "server") {
+            nameDiv.style.textAlign = "center";
+            nameDiv.textContent = name || "Сервер";
+            bubble.className = "bubble-server";
+        } else {
+            nameDiv.style.textAlign = "left";
+            nameDiv.textContent = name || "Игрок";
+            bubble.className = "bubble-other";
+        }
+
+        // Создаем таблицу
+        const table = document.createElement("table");
+        table.style.borderCollapse = "collapse";
+        table.style.width = "100%";
+        table.style.marginTop = "4px";
+
+        // Заголовки
+        const thead = document.createElement("thead");
+        const headRow = document.createElement("tr");
+        columns.forEach(col => {
+            const th = document.createElement("th");
+            th.textContent = col;
+            th.style.border = "1px solid #555";
+            th.style.padding = "6px 8px";
+            th.style.background = "rgba(255,255,255,0.1)";
+            th.style.textAlign = "left";
+            headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        // Данные
+        const tbody = document.createElement("tbody");
+        data.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(cell => {
+                const td = document.createElement("td");
+                td.textContent = cell;
+                td.style.border = "1px solid #555";
+                td.style.padding = "4px 6px";
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+
+        bubble.appendChild(table);
+        wrap.appendChild(nameDiv);
+        wrap.appendChild(bubble);
+        document.getElementById("messages").appendChild(wrap);
+
+        wrap.scrollIntoView();
+    }
+
+
+    // ========= СИСТЕМА СПИСКА СЕРВЕРОВ =========
+
+    const serversMenu = document.getElementById("serversMenu");
+    const closeServersBtn = document.getElementById("closeServersBtn");
+    const serversList = document.getElementById("serversList");
+    const clearServersBtn = document.getElementById("clearServersBtn");
+
+    let servers = [];  // список ключей серверов
+
+    closeServersBtn.onclick = () => serversMenu.style.display = "none";
+
+    clearServersBtn.onclick = () => {
+        clearServers();
+        renderServersList();
+    };
+
+
+    // === Показывает меню ===
+    function showServersMenu() {
+        renderServersList();
+        serversMenu.style.display = "block";
+    }
+
+
+    // === Добавить сервер ===
+    function addServer(key, name = "Без имени") {
+        if (!servers.some(s => s.key === key)) {
+            servers.push({ key, name });
+        }
+        renderServersList();
+    }
+
+
+
+    // === Очистить список ===
+    function clearServers() {
+        servers = [];
+        renderServersList();
+    }
+
+
+    // === Задать весь список ===
+    function setServers(list) {
+        servers = Array.from(new Set(list)); // убираем дубли
+        renderServersList();
+    }
+
+
+    // === Нарисовать UI со списком серверов ===
+    function renderServersList() {
+        serversList.innerHTML = "";
+
+        if (servers.length === 0) {
+            serversList.innerHTML = `
+                <div style="
+                    background:rgba(255,255,255,0.05);
+                    padding:14px;
+                    border-radius:10px;
+                    text-align:center;
+                    color:#bcbcbc;
+                    font-size:16px;
+                ">
+                    Список пуст
+                </div>`;
+            return;
+        }
+
+        servers.forEach(server => {
+            const item = document.createElement("div");
+            item.className = "server-item";
+
+            item.style.display = "flex";
+            item.style.alignItems = "center";
+            item.style.justifyContent = "space-between";
+
+            item.innerHTML = `
+                <div style="
+                    font-size:13px;
+                    color:#9a9a9a;
+                    display:flex;
+                    align-items:center;
+                    gap:6px;
+                ">
+                    🌐 ${server.name}
+                </div>
+
+                <div style="
+                    font-size:15px;
+                    color:#ffffff;
+                    font-weight:500;
+                    text-align:right;
+                ">
+                    ${server.key}
+                </div>
+            `;
+
+            item.onclick = () => selectServer(server);
+            serversList.appendChild(item);
+        });
+    }
+
+    // === Нажатие на сервер для подключения ===
+    function selectServer(server) {
+        serversMenu.style.display = "none";
+
+        joinForm.style.display = "flex";
+        createBtn.style.display = "none";
+        joinBtn.style.display = "none";
+        reconnectBtn.style.display = "none";
+
+        document.getElementById("joinKey").value = server.key;
+    }
+
+
+    const refreshServersBtn = document.getElementById("refreshServersBtn");
+
+    refreshServersBtn.onclick = async () => {
+        await refreshServers();
+        renderServersList();
+    };
+
+    // === Обновить список серверов ===
+    async function refreshServers() {
+        window.pywebview.api.refresh_servers();
+    }
+</script>
+</html>

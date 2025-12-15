@@ -1,0 +1,1 @@
+pyinstaller --noconsole -n VadimChat -i data/chat/icon.ico main.py

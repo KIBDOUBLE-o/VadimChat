@@ -1,0 +1,35 @@
+{
+    "id": "example",
+    "display_name": "Example",
+    "author": "Dev",
+    "version": "1.0.0",
+    "description": "nothing",
+    "py": [
+        {
+            "hook": "server.client_processing_start",
+            "path": "py/client_processing_start"
+        },
+        {
+            "hook": "server.command_proceed",
+            "path": "py/commands"
+        },
+        {
+            "hook": "ui.api.send_any",
+            "path": "py/send_any"
+        },
+        {
+            "hook": "crh.update_received_messages:end",
+            "path": "py/crh_updater"
+        }
+    ],
+    "webview": [
+        {
+            "source": "body_main",
+            "path": "webview/new_btn.html"
+        },
+        {
+            "source": "style_main",
+            "path": "webview/new_btn_style.css"
+        }
+    ]
+}

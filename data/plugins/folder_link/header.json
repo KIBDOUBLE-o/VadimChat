@@ -1,0 +1,35 @@
+{
+    "id": "folder_link",
+    "display_name": "Folder Link",
+    "author": "Dev",
+    "version": "1.0.0",
+    "description": "Позволяет создавать общие папки с другими пользователями",
+    "py": [
+        {
+            "hook": "server.command_proceed",
+            "path": "py/command_proceed"
+        },
+        {
+            "hook": "crh.update_received_messages:end",
+            "path": "py/crh_receiving"
+        },
+        {
+            "hook": "ui.api.send_message",
+            "path": "py/send_message"
+        },
+        {
+            "hook": "client.client_disconnect:end",
+            "path": "py/disconnect_end"
+        },
+        {
+            "hook": "client.client_receiving_start",
+            "path": "py/receiving_start"
+        },
+        {
+            "hook": "client.plugin_update",
+            "path": "py/plugin_update"
+        }
+    ],
+    "webview": [
+    ]
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "master": "Example",
+        "message": "[msg][Thread1][Thread1]||BOTH|Hello World"
+    },
+    {
+        "master": "Example",
+        "message": "[msg][Thread1][Thread1]||BOTH|Hello World"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|asd"
+    },
+    {
+        "master": "Example",
+        "message": "[msg][Thread1][Thread1]||BOTH|Hello World"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|asd"
+    },
+    {
+        "master": "Example",
+        "message": "[msg][Thread1][Thread1]||BOTH|Hello World"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|asd"
+    }
+]

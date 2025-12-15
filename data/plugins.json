@@ -1,0 +1,14 @@
+[
+    {
+        "id": "example",
+        "enabled": false
+    },
+    {
+        "id": "tictactoe",
+        "enabled": false
+    },
+    {
+        "id": "folder_link",
+        "enabled": true
+    }
+]

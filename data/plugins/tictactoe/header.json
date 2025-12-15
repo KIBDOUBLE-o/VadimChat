@@ -1,0 +1,39 @@
+{
+    "id": "tictactoe",
+    "display_name": "Крестики-Нолики",
+    "author": "Deep Seek",
+    "version": "1.0.0",
+    "description": "Многопользовательская игра в крестики-нолики прямо в чате",
+    "py": [
+        {
+            "hook": "server.command_proceed",
+            "path": "py/commands"
+        },
+        {
+            "hook": "ui.api.new",
+            "path": "py/api_hooks"
+        },
+        {
+            "hook": "crh.update_received_messages:end",
+            "path": "py/crh_update"
+        }
+    ],
+    "webview": [
+        {
+            "source": "body_chat",
+            "path": "webview/tictactoe_button.html"
+        },
+        {
+            "source": "body_main",
+            "path": "webview/tictactoe_menu.html"
+        },
+        {
+            "source": "style_main",
+            "path": "webview/style.css"
+        },
+        {
+            "source": "script_main",
+            "path": "webview/script.js"
+        }
+    ]
+}

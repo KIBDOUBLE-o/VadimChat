@@ -1,0 +1,12 @@
+{
+    "nickname": "ouf1",
+    "key": "021",
+    "default_ip": "192.168.x.y",
+    "use_universal": true,
+    "port": "12345",
+    "universal": "x.y",
+    "buffer_size": 4096,
+    "data_chunk_size": "1500",
+    "chunk_sending_rate": "0.05",
+    "debug_mode": false
+}

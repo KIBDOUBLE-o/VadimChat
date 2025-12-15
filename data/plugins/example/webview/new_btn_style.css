@@ -1,0 +1,20 @@
+#newBtn {
+    position: fixed;
+    top: 10px;
+    left: 55px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.15);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    z-index: 100000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
