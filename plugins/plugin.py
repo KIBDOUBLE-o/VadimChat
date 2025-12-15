@@ -40,7 +40,6 @@ class Plugin:
                 self.python.append(PythonHook(py["hook"], open(f'{plugin_path}/{py["path"]}.py', encoding='utf-8').read()))
             for web in self.header["webview"]:
                 self.webview.append((web["source"], open(f'{plugin_path}/{web["path"]}', encoding='utf-8').read(), {}))
-            self.init_properties()
             return ''
         except:
             return traceback.format_exc()
@@ -50,6 +49,7 @@ class Plugin:
         plugin_path = Plugin.get_path(name)
         try:
             self.header = json.loads(open(f'{plugin_path}/header.json', encoding='utf-8').read())
+            self.init_properties()
             return ''
         except:
             return f'Header loading error:\n{traceback.format_exc()}'
