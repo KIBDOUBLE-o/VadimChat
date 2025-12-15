@@ -13,8 +13,24 @@
         <button id="settingsBtn" class="top-button" data-tooltip="Настройки">⚙️</button>
         <button id="pluginsTopBtn" class="top-button" data-tooltip="Плагины">🔌</button>
         <button id="serversTopBtn" class="top-button" data-tooltip="Комнаты">🌐</button>
+        <button id="errorsTopBtn" class="top-button" data-tooltip="Ошибки плагинов">🐞</button>
     </div>
     <!-- source:body_menu -->
+</div>
+
+<div id="errorsMenu" class="window-container" style="display:none;">
+    <div class="window-content">
+        <div class="window-header">
+            <h2 class="window-title">🐞 Лог ошибок</h2>
+            <button id="closeErrorsBtn" class="window-close-btn">✖</button>
+        </div>
+        
+        <div class="window-controls">
+            <button id="clearErrorsBtn" class="window-control-btn">🗑 Очистить все</button>
+        </div>
+        
+        <div id="errorsList" class="window-list"></div>
+    </div>
 </div>
 
 <div id="pluginsMenu" class="window-container" style="display:none;">

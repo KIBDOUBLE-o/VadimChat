@@ -1,0 +1,12 @@
+{
+    "id": "test",
+    "display_name": "Test",
+    "author": "Dev",
+    "version": "1.0.0",
+    "description": "nothing",
+    "dependencies": [],
+    "py": [
+    ],
+    "webview": [
+    ]
+}

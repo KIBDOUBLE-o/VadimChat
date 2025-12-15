@@ -12,13 +12,20 @@ from plugins.python_hook import PythonHook
 class PluginManager:
     def __init__(self):
         self.plugins = []
-        self.env = {}
+        self.errors = []
 
     def load_plugins(self):
         plugins = []
         for name in os.listdir("data/plugins"):
-            plugins.append(Plugin.load_plugin(name))
-        print(', '.join([str(plugin) for plugin in plugins]))
+            plugin = Plugin()
+            self.errors.append((name, plugin.load_header(name)))
+            plugins.append(plugin)
+        print(f'Header loading: {', '.join([str(plugin) for plugin in plugins])}')
+        for plugin in plugins:
+            try:
+                self.errors.append((plugin.header["id"], plugin.continue_loading(lambda id: self.containment_check(id))))
+            except: pass
+        print(f'Plugins are loaded finally')
 
         plugins_data = AppData.get_json('plugins.json')
         for plugin in plugins:
@@ -34,6 +41,9 @@ class PluginManager:
             })
         AppData.set_json('plugins.json', plugins_data)
         self.plugins = plugins
+
+    def containment_check(self, id):
+        return len([plugin for plugin in self.plugins if plugin.header["id"] == id]) > 0
 
     def call_python_hook(self, _self, hook_type, _locals, _globals, log=True):
         """Выполняет код с локальными переменными вызывающего метода"""

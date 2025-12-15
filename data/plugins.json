@@ -10,5 +10,13 @@
     {
         "id": "folder_link",
         "enabled": true
+    },
+    {
+        "id": "NaN",
+        "enabled": true
+    },
+    {
+        "id": "test",
+        "enabled": true
     }
 ]

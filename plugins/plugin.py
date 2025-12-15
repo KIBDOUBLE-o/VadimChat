@@ -1,10 +1,13 @@
 import json
+import traceback
 
 from plugins.python_hook import PythonHook
 
 
 class Plugin:
     def __init__(self):
+        self.path_name = ''
+
         self.id = 'NaN'
         self.display_name = 'Unnamed'
         self.description = ''
@@ -13,25 +16,43 @@ class Plugin:
 
         self.header = {}
 
-        self.dependencies = []
-
         self.python = []
         self.webview = []
 
         self.enabled = True
 
     @staticmethod
-    def load_plugin(name: str):
-        plugin_path = f'data/plugins/{name}'
-        plugin = Plugin()
-        plugin.header = json.loads(open(f'{plugin_path}/header.json', encoding='utf-8').read())
-        plugin.dependencies = plugin.header.get("dependencies", [])
-        for py in plugin.header["py"]:
-            plugin.python.append(PythonHook(py["hook"], open(f'{plugin_path}/{py["path"]}.py', encoding='utf-8').read()))
-        for web in plugin.header["webview"]:
-            plugin.webview.append((web["source"], open(f'{plugin_path}/{web["path"]}', encoding='utf-8').read(), {}))
-        plugin.init_properties()
-        return plugin
+    def get_path(name: str):
+        return f'data/plugins/{name}'
+
+    def continue_loading(self, dependency_check):
+        plugin_path = Plugin.get_path(self.path_name)
+        try:
+            if self.header == {}:
+                self.load_header(self.path_name)
+
+            if "dependencies" in self.header:
+                for dependency in self.header["dependencies"]:
+                    if not dependency_check(dependency):
+                        return f'A required dependency "{dependency}" is missing'
+
+            for py in self.header["py"]:
+                self.python.append(PythonHook(py["hook"], open(f'{plugin_path}/{py["path"]}.py', encoding='utf-8').read()))
+            for web in self.header["webview"]:
+                self.webview.append((web["source"], open(f'{plugin_path}/{web["path"]}', encoding='utf-8').read(), {}))
+            self.init_properties()
+            return ''
+        except:
+            return traceback.format_exc()
+
+    def load_header(self, name: str):
+        self.path_name = name
+        plugin_path = Plugin.get_path(name)
+        try:
+            self.header = json.loads(open(f'{plugin_path}/header.json', encoding='utf-8').read())
+            return ''
+        except:
+            return f'Header loading error:\n{traceback.format_exc()}'
 
     def init_properties(self):
         self.id = self.header["id"]

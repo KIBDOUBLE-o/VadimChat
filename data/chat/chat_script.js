@@ -919,3 +919,182 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+
+
+
+
+// Добавьте в начало файла после объявления других констант
+const errorsTopBtn = document.getElementById("errorsTopBtn");
+const errorsMenu = document.getElementById("errorsMenu");
+const closeErrorsBtn = document.getElementById("closeErrorsBtn");
+const clearErrorsBtn = document.getElementById("clearErrorsBtn");
+const errorsList = document.getElementById("errorsList");
+
+// Простая система ошибок
+let pluginErrors = [];
+
+// Инициализация кнопки ошибок
+errorsTopBtn.onclick = () => {
+    showErrorsMenu();
+};
+
+closeErrorsBtn.onclick = () => {
+    errorsMenu.style.display = "none";
+};
+
+clearErrorsBtn.onclick = () => {
+    clearAllErrors();
+};
+
+// Функция для показа меню ошибок
+function showErrorsMenu() {
+    renderErrorsList();
+    errorsMenu.style.display = "block";
+    // Снимаем подсветку при открытии меню
+    removeErrorHighlight();
+}
+
+// Функция для добавления ошибки плагина
+function alertError(pluginName, errorMessage) {
+    const error = {
+        id: Date.now() + Math.random().toString(36).substr(2, 9),
+        pluginName: pluginName || "Неизвестный плагин",
+        errorMessage: errorMessage || "Произошла ошибка",
+        timestamp: new Date().toISOString(),
+        read: false
+    };
+    
+    pluginErrors.push(error);
+    
+    // Обновляем бейдж на кнопке
+    updateErrorBadge();
+    
+    // Подсвечиваем кнопку
+    highlightErrorButton();
+    
+    // Обновляем список ошибок, если меню открыто
+    if (errorsMenu.style.display === "block") {
+        renderErrorsList();
+    }
+    
+    // Логируем ошибку в дебаг консоль
+    logDebug(`Ошибка плагина "${pluginName}": ${errorMessage}`, "error");
+    
+    return error.id;
+}
+
+// Функция для подсветки кнопки с ошибками
+function highlightErrorButton() {
+    errorsTopBtn.classList.add("has-errors");
+    
+    // Добавляем анимацию пульсации
+    errorsTopBtn.style.animation = "errorPulse 2s infinite";
+}
+
+// Функция для снятия подсветки
+function removeErrorHighlight() {
+    // Отмечаем все ошибки как прочитанные
+    pluginErrors.forEach(error => error.read = true);
+    
+    // Обновляем бейдж
+    updateErrorBadge();
+    
+    // Если нет непрочитанных ошибок, снимаем подсветку
+    const unreadErrors = pluginErrors.filter(e => !e.read);
+    if (unreadErrors.length === 0) {
+        errorsTopBtn.classList.remove("has-errors");
+        errorsTopBtn.style.animation = "";
+    }
+}
+
+// Функция для обновления бейджа с количеством ошибок
+function updateErrorBadge() {
+    const unreadErrors = pluginErrors.filter(e => !e.read);
+    const count = unreadErrors.length;
+    
+    // Удаляем старый бейдж и точку, если есть
+    const oldBadge = errorsTopBtn.querySelector('.error-badge');
+    const oldDot = errorsTopBtn.querySelector('.error-dot');
+    
+    if (oldBadge) oldBadge.remove();
+    if (oldDot) oldDot.remove();
+    
+    // Добавляем новый бейдж и точку, если есть ошибки
+    if (count > 0) {
+        // Создаем красную точку
+        const dot = document.createElement('div');
+        dot.className = 'error-dot';
+        errorsTopBtn.appendChild(dot);
+        
+        // Создаем бейдж с числом
+        const badge = document.createElement('div');
+        badge.className = 'error-badge';
+        badge.textContent = count > 9 ? '9+' : count.toString();
+        errorsTopBtn.appendChild(badge);
+    }
+}
+
+// Функция для рендеринга списка ошибок
+function renderErrorsList() {
+    errorsList.innerHTML = "";
+    
+    if (pluginErrors.length === 0) {
+        errorsList.innerHTML = `
+            <div class="window-empty-state">
+                <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+                <h3>Нет ошибок</h3>
+                <p style="color: #888; margin-top: 10px;">
+                    Все плагины работают стабильно
+                </p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Сортируем ошибки по времени (новые сверху)
+    const sortedErrors = [...pluginErrors].sort((a, b) => 
+        new Date(b.timestamp) - new Date(a.timestamp)
+    );
+    
+    sortedErrors.forEach(error => {
+        const errorElement = document.createElement("div");
+        errorElement.className = "window-list-item error-item";
+        
+        const time = new Date(error.timestamp);
+        const timeString = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dateString = time.toLocaleDateString();
+        
+        errorElement.innerHTML = `
+            <div class="error-plugin-name">${escapeHtml(error.pluginName)}</div>
+            <div class="error-message">${escapeHtml(error.errorMessage)}</div>
+            <div class="error-time">${dateString} ${timeString}</div>
+        `;
+        
+        errorsList.appendChild(errorElement);
+    });
+}
+
+// Функция для очистки всех ошибок
+function clearAllErrors() {
+    if (pluginErrors.length === 0) return;
+    
+    if (confirm(`Очистить все ошибки (${pluginErrors.length})?`)) {
+        pluginErrors = [];
+        updateErrorBadge();
+        removeErrorHighlight();
+        renderErrorsList();
+    }
+}
+
+// Функция для экранирования HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Инициализация при загрузке
+window.addEventListener('load', () => {
+    updateErrorBadge();
+});

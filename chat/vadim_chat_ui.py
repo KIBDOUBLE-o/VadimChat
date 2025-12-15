@@ -146,6 +146,9 @@ class VadimChatUI:
         self.call("logDebug", message)
         print(f"DEBUG: [{message}]")
 
+    def alert_plugin_error(self, plugin_name, error):
+        self.call('alertError', plugin_name, error)
+
     def call(self, func: str, *args):
         js_args = ", ".join(json.dumps(arg) for arg in args)
         self.window.evaluate_js(f"{func}({js_args});")
@@ -173,6 +176,9 @@ class VadimChatUI:
 
         for plugin in self.plugin_manager.plugins:
             self.add_plugin(plugin)
+        for plugin_error in self.plugin_manager.errors:
+            if plugin_error[1] == '': continue
+            self.alert_plugin_error(plugin_error[0], plugin_error[1])
         #self.pinger.start_scan_loop()
         #self.pinger.start_visualize_loop(self)
 
