@@ -1,0 +1,698 @@
+[INFO] (22:33:21.273033) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (22:33:21.276818) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (22:33:21.276983) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (22:44:59.308594) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (22:44:59.317256) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_movedb64(*encoded.split(':'))
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\movedb64.py", line 14, in decode_movedb64
+    b64 = ''.join([chr(uni) for uni in [ord(c) + int(lower) for c in data]])
+                                                 ~~~^^^^^^^
+ValueError: invalid literal for int() with base 10: '#\x17&C2\x17\x0874\x178<3=%8\x19\x15<;1I\x128)=\t\x014\x13\x12\x001\x17<J\x19\x17*<)("\x013=%8'
+
+[INFO] (22:46:02.010456) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (22:46:02.015216) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (22:46:02.015386) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (22:54:09.348384) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (22:54:09.355050) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_extramovedb64(*reversed(encoded.split(':')))
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 18, in decode_extramovedb64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb9 in position 1: invalid start byte
+
+[INFO] (22:54:32.451746) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (22:54:32.459784) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_extramovedb64(*reversed(encoded.split(':')))
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 19, in decode_extramovedb64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb9 in position 1: invalid start byte
+
+[INFO] (22:57:19.678736) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (22:57:19.682273) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (22:57:19.682415) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (23:00:03.866043) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (23:00:03.872175) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (23:00:03.872320) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (23:02:42.117491) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (23:02:42.121081) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (23:02:42.121241) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (23:08:48.698670) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (23:08:48.702215) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (23:08:48.702363) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (23:10:38.591599) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (23:10:38.592355) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (23:10:38.592507) - [SERVER] Received user command: '$P' Details: (root: '$P', first: '', second: '', other: '')
+[INFO] (23:10:41.534925) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:10:41.543506) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 13, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:10:58.079130) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:10:58.087127) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 14, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:11:56.053108) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:11:56.061323) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 14, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:14:51.288008) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:14:51.294872) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 15, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:15:49.398270) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:15:49.405140) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 15, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:16:37.829025) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (23:16:37.838170) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 15, in encode_extramovedb64
+    encoded = ''.join([chr(uni) for uni in unicodes])
+                       ~~~^^^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (23:21:28.436512) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (23:21:28.440077) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (23:21:28.440221) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (11:59:06.927125) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (11:59:06.934175) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (11:59:06.934320) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:02:03.122189) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:02:03.129780) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 25, in encode_extramovedb64
+    uni += int(ln(pos * 10) * 10)
+               ~~^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 7, in ln
+    return log(x, e)
+ValueError: math domain error
+
+[INFO] (12:02:35.777145) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:02:35.783459) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_extramovedb64(*reversed(encoded.split(':')))
+TypeError: decode_extramovedb64() takes 2 positional arguments but 4 were given
+
+[INFO] (12:03:16.496120) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (12:03:16.498659) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (12:03:16.498801) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:24:09.765328) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:24:09.773347) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 129, in proceed_command
+    encoded = encode_extramovedb64('Hello there! Idk about this feature!')
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 30, in encode_extramovedb64
+    uni += int(an(pos, len(unicodes)/20))
+               ~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\extramovedb64.py", line 10, in an
+    return x ** (-z*x) * acos(x)
+                         ~~~~^^^
+ValueError: math domain error
+
+[INFO] (12:24:37.260689) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (12:24:37.264486) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (12:24:37.264631) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:25:01.827887) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (12:25:01.831911) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (12:25:01.832062) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:39:45.187284) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (12:39:45.193486) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (12:39:45.193642) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:47:49.942116) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:47:49.952887) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 69, in decode_triplex64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\AppData\Local\Programs\Python\Python313-32\Lib\base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Incorrect padding
+
+[INFO] (12:48:07.853689) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (12:48:07.857682) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (12:48:07.857824) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (12:53:37.412275) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:53:37.419452) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 45, in decode_triplex64
+    seed = sum(map(int, list(str(data))))
+ValueError: invalid literal for int() with base 10: 'q'
+
+[INFO] (12:54:22.562943) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:54:22.570207) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 59, in decode_triplex64
+    uni -= random_additions[pos]
+           ~~~~~~~~~~~~~~~~^^^^^
+TypeError: 'list_reverseiterator' object is not subscriptable
+
+[INFO] (12:54:43.746579) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:54:43.754000) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 59, in decode_triplex64
+    uni -= random_additions[pos]
+           ~~~~~~~~~~~~~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[INFO] (12:54:57.105798) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:54:57.113388) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 77, in decode_triplex64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xab in position 1: invalid start byte
+
+[INFO] (12:55:49.000955) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:55:49.009412) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 77, in decode_triplex64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\AppData\Local\Programs\Python\Python313-32\Lib\base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Invalid base64-encoded string: number of data characters (25) cannot be 1 more than a multiple of 4
+
+[INFO] (12:58:16.956659) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:58:16.966267) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 77, in decode_triplex64
+    decoded = b64decode(b64.encode(encoding)).decode(encoding)
+              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\AppData\Local\Programs\Python\Python313-32\Lib\base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Incorrect padding
+
+[INFO] (12:58:56.299626) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:58:56.307849) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 75, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 75, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (12:59:24.954898) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:59:24.962895) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 82, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 82, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (12:59:47.130329) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (12:59:47.138220) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 83, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 83, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (13:00:38.224946) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:00:38.233574) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 84, in decode_triplex64
+    return b64decode(b64.encode(encoding)).decode(encoding)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\AppData\Local\Programs\Python\Python313-32\Lib\base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Incorrect padding
+
+[INFO] (13:01:44.095081) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:01:44.103921) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in decode_triplex64
+    return b64decode(b64.encode(encoding)).decode(encoding)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 5-6: invalid continuation byte
+
+[INFO] (13:03:33.228299) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:03:33.237486) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in decode_triplex64
+    return b64decode(b64.encode(encoding)).decode(encoding)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 5-6: invalid continuation byte
+
+[INFO] (13:05:30.608874) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:05:30.618286) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (13:05:48.336383) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:05:48.344293) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (13:06:54.958172) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (13:06:54.967263) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 130, in proceed_command
+    decoded = decode_triplex64(encoded)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in decode_triplex64
+    b64 = ''.join(chr(x) for x in unicodes)
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 86, in <genexpr>
+    b64 = ''.join(chr(x) for x in unicodes)
+                  ~~~^^^
+ValueError: chr() arg not in range(0x110000)
+
+[INFO] (13:08:49.019314) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (13:08:49.023338) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (13:08:49.023484) - [SERVER] Received user command: '$p' Details: (root: '$p', first: '', second: '', other: '')
+[INFO] (16:48:28.376530) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (16:48:28.380258) - [SERVER] New client accepted!
+[INFO] (16:49:29.464429) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:49:29.466852) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s 57:Aruuª³ÖÆ¡ûÓĲÿēÎÇãėØģõÑĬÚþňêÕýĘÞøą¡¼±®·¯àj²­
+[INFO] (16:49:29.469666) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:49:29.516668) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:49:29.516916) - [SERVER] Received user command: 'safe Привет, как жизнь?' Details: (root: 'safe', first: 'Привет,', second: 'как', other: 'как жизнь?')
+[INFO] (16:55:45.635985) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (16:55:45.639891) - [SERVER] New client accepted!
+[INFO] (16:55:48.698418) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:55:48.702824) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:55:48.750934) - [UI] [CLIENT] Сообщение отправлено: asdas
+[INFO] (16:55:57.650095) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:55:57.651846) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|*py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1") 
+выполнение пользователю ouf1
+[INFO] (16:55:57.652041) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")
+[INFO] (16:55:57.652448) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:55:57.652589) - [SERVER] Received user command: 'send ouf1 py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")' Details: (root: 'send', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")')
+[INFO] (16:55:57.653711) - [SERVER] Код "py self.callback.send_self("safe 70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")" отправлен на выполнение пользователю ouf1
+[INFO] (16:55:57.654252) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:55:57.654378) - [SERVER] Received user command: 'send ouf1 py self.callback.send_self("safe 70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'send', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe 70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (16:55:57.654828) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:55:57.654961) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (16:55:57.657523) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:55:57.705302) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|*py self.callback.send_self("safe 70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (16:55:57.705507) - [CLIENT] Illegal execution command: py self.callback.send_self("safe
+[ERROR] (16:55:57.713895) - [CLIENT] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_client.py", line 94, in proceed_illegal_execution
+    result = eval(other)
+  File "<string>", line 1
+    self.callback.send_self("safe
+                            ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_client.py", line 98, in proceed_illegal_execution
+    exec(other)
+    ~~~~^^^^^^^
+  File "<string>", line 1
+    self.callback.send_self("safe
+                            ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+[INFO] (16:55:57.716654) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:57:07.674100) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (16:57:07.678725) - [SERVER] New client accepted!
+[INFO] (16:57:38.935019) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:57:38.936704) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|*py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1") 
+выполнение пользователю ouf1
+[INFO] (16:57:38.936879) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")
+[INFO] (16:57:38.937243) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:57:38.937406) - [SERVER] Received user command: 'send ouf1 py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")' Details: (root: 'send', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("Hello there!", ChatMessageSource.Self, "ouf1")')
+[INFO] (16:57:38.940131) - [SERVER] Код "py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")" отправлен на выполнение пользователю ouf1
+[INFO] (16:57:38.940736) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:57:38.940858) - [SERVER] Received user command: 'send ouf1 py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'send', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (16:57:38.941261) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:57:38.941380) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (16:57:38.944809) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:57:38.989631) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (16:57:38.989870) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")
+[INFO] (16:57:38.993175) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:57:39.044307) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:58:39.959193) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (16:58:39.963854) - [SERVER] New client accepted!
+[INFO] (16:58:49.525821) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:58:49.527708) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (16:58:49.527891) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")
+[INFO] (16:58:49.531678) - [SERVER] Код "py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")" отправлен на выполнение пользователю ouf1
+[INFO] (16:58:49.532334) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:58:49.532458) - [SERVER] Received user command: 'send ouf1 py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'send', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (16:58:49.532962) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:58:49.533086) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (16:58:49.535737) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:58:49.580991) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (16:59:37.737715) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (16:59:37.742193) - [SERVER] New client accepted!
+[INFO] (16:59:46.003880) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (16:59:46.004586) - [SERVER] Код "py self.callback.ui.log("Hello there!", "me", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (16:59:46.005175) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:59:46.005303) - [SERVER] Received user command: 'ssend ouf1 py self.callback.ui.log("Hello there!", "me", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("Hello there!", "me", "ouf1")')
+[INFO] (16:59:46.005590) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.ui.log("Hello there!", "me", "ouf1") 
+[INFO] (16:59:46.005689) - [SERVER] Код "py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (16:59:46.005730) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", "me", "ouf1")
+[INFO] (16:59:46.006171) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:59:46.006291) - [SERVER] Received user command: 'ssend ouf1 py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (16:59:46.006748) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (16:59:46.006869) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (16:59:46.008335) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (16:59:46.008500) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")
+[INFO] (16:59:46.013173) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (17:03:54.847584) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (17:03:54.851544) - [SERVER] New client accepted!
+[INFO] (17:04:08.228764) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:04:08.229550) - [SERVER] Код "py self.callback.ui.log("Hello there!", "me", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:04:08.230057) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:04:08.230175) - [SERVER] Received user command: 'ssend ouf1 py self.callback.ui.log("Hello there!", "me", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("Hello there!", "me", "ouf1")')
+[INFO] (17:04:08.230504) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.ui.log("Hello there!", "me", "ouf1") 
+�есшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:04:08.230675) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", "me", "ouf1")
+[INFO] (17:04:08.231039) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:04:08.231168) - [SERVER] Received user command: 'ssend ouf1 py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (17:04:08.231616) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:04:08.231735) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (17:04:08.233155) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (17:04:08.233304) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")
+[INFO] (17:04:08.237624) - [OK] Plugin #743 (crh.update_received_messages:end) executed
+[INFO] (17:05:30.594885) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (17:05:30.598634) - [SERVER] New client accepted!
+[INFO] (17:05:38.146269) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:05:38.147081) - [SERVER] Код "py self.callback.ui.log("Hello there!", "me", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:05:38.147621) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:05:38.147758) - [SERVER] Received user command: 'ssend ouf1 py self.callback.ui.log("Hello there!", "me", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("Hello there!", "me", "ouf1")')
+[INFO] (17:05:38.148037) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.ui.log("Hello there!", "me", "ouf1") 
+[INFO] (17:05:38.148141) - [SERVER] Код "py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:05:38.148168) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", "me", "ouf1")
+[INFO] (17:05:38.148656) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:05:38.148794) - [SERVER] Received user command: 'ssend ouf1 py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")')
+[INFO] (17:05:38.149244) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:05:38.149362) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (17:05:38.150509) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1") 
+[INFO] (17:05:38.150642) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf1")
+[ERROR] (17:05:38.156027) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 43, in client_processing
+    self.crh.update_received_messages()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\chunked_receiving_helper.py", line 77, in update_received_messages
+    self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 51, in decode_triplex64
+    lower = int(lower_oct, 8)
+ValueError: invalid literal for int() with base 8: 'safe*70'
+
+[INFO] (17:06:24.818014) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (17:06:24.822823) - [SERVER] New client accepted!
+[INFO] (17:06:34.848656) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:06:34.849419) - [SERVER] Код "py self.callback.ui.log("Hello there!", "me", "ouf")" бесшумно отправлен на выполнение пользователю ouf
+[INFO] (17:06:34.849988) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:06:34.850112) - [SERVER] Received user command: 'ssend ouf py self.callback.ui.log("Hello there!", "me", "ouf")' Details: (root: 'ssend', first: 'ouf', second: 'py', other: 'py self.callback.ui.log("Hello there!", "me", "ouf")')
+[INFO] (17:06:34.850462) - [SERVER] Код "py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf")" бесшумно отправлен на выполнение пользователю ouf
+[INFO] (17:06:34.850919) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:06:34.851038) - [SERVER] Received user command: 'ssend ouf py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf")' Details: (root: 'ssend', first: 'ouf', second: 'py', other: 'py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf")')
+[INFO] (17:06:34.851472) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:06:34.851589) - [SERVER] Received user command: 'safe Hello there!' Details: (root: 'safe', first: 'Hello', second: 'there!', other: 'there!')
+[INFO] (17:06:34.852228) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.ui.log("Hello there!", "me", "ouf") 
+[INFO] (17:06:34.852423) - [CLIENT] Illegal execution command: py self.callback.ui.log("Hello there!", "me", "ouf")
+[INFO] (17:06:34.855160) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf") ouf:[msg]||BOTH|!safe Hello there!
+[INFO] (17:06:34.855396) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*70:eÇÄË×èĎČÂęčéÍÑ»", "ouf")
+[ERROR] (17:06:34.858202) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 43, in client_processing
+    self.crh.update_received_messages()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\chunked_receiving_helper.py", line 77, in update_received_messages
+    self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 51, in decode_triplex64
+    lower = int(lower_oct, 8)
+ValueError: invalid literal for int() with base 8: 'safe*70'
+
+[INFO] (17:06:34.859432) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|safe*70:eÇÄË×èĎČÂęčéÍÑ»
+[ERROR] (17:06:34.862960) - [CLIENT] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_client.py", line 60, in client_receiving_processing
+    self.crh.update_received_messages()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\chunked_receiving_helper.py", line 77, in update_received_messages
+    self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 51, in decode_triplex64
+    lower = int(lower_oct, 8)
+ValueError: invalid literal for int() with base 8: 'safe*70'
+
+[INFO] (17:08:24.838870) - [OK] Plugin #41 (client.client_receiving_start) executed
+[INFO] (17:08:24.842438) - [SERVER] New client accepted!
+[INFO] (17:08:37.020909) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:08:37.021684) - [SERVER] Код "py self.callback.ui.log("HELL", "me", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:08:37.022256) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:08:37.022384) - [SERVER] Received user command: 'ssend ouf1 py self.callback.ui.log("HELL", "me", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.ui.log("HELL", "me", "ouf1")')
+[INFO] (17:08:37.022646) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.ui.log("HELL", "me", "ouf1") 
+[INFO] (17:08:37.022730) - [SERVER] Код "py self.callback.send_self("safe*75:QèÒÿ¶´q", "ouf1")" бесшумно отправлен на выполнение пользователю ouf1
+[INFO] (17:08:37.022795) - [CLIENT] Illegal execution command: py self.callback.ui.log("HELL", "me", "ouf1")
+[INFO] (17:08:37.023233) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:08:37.023359) - [SERVER] Received user command: 'ssend ouf1 py self.callback.send_self("safe*75:QèÒÿ¶´q", "ouf1")' Details: (root: 'ssend', first: 'ouf1', second: 'py', other: 'py self.callback.send_self("safe*75:QèÒÿ¶´q", "ouf1")')
+[INFO] (17:08:37.024642) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:08:37.024803) - [SERVER] Received user command: 'safe HELL' Details: (root: 'safe', first: 'HELL', second: '', other: '')
+[INFO] (17:08:37.024959) - [CLIENT] MESSAGE RECEIVED: [msg]||BOTH|s*py self.callback.send_self("safe*75:QèÒÿ¶´q", "ouf1") 
+[INFO] (17:08:37.025089) - [CLIENT] Illegal execution command: py self.callback.send_self("safe*75:QèÒÿ¶´q", "ouf1")
+[ERROR] (17:08:37.030667) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 43, in client_processing
+    self.crh.update_received_messages()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\chunked_receiving_helper.py", line 77, in update_received_messages
+    self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 51, in decode_triplex64
+    lower = int(lower_oct, 8)
+ValueError: invalid literal for int() with base 8: 'safe*75'
+
+[INFO] (17:10:42.841399) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (17:10:42.847649) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 132, in proceed_command
+    self.callback.log(encode_triplex64(other), ChatMessageSource.Program, 'Server')
+                      ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 25, in encode_triplex64
+    lower = min(unicodes)
+ValueError: min() iterable argument is empty
+
+[INFO] (17:12:11.143277) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:12:11.144963) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:12:11.145109) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (17:45:05.864496) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (17:45:05.869556) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 132, in proceed_command
+    self.callback.log(encode_triplex64('Hello there! And i am a NIGGATIVE!'), ChatMessageSource.Program, 'Server')
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 49, in encode_triplex64
+    uni += int(cbrtzarcsin(dif, seed * dif))
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'complex'
+
+[INFO] (17:46:25.413671) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (17:46:25.420483) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 132, in proceed_command
+    self.callback.log(encode_triplex64('Hello there! And i am a NIGGATIVE!'), ChatMessageSource.Program, 'Server')
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\coding\triplex64.py", line 49, in encode_triplex64
+    uni += int(cbrtzarcsin(dif, 0.5))
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'complex'
+
+[INFO] (17:48:17.891026) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:48:17.892939) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:48:17.893090) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (17:49:58.544301) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (17:49:58.546379) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (17:49:58.546540) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (18:04:39.031714) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:04:39.033521) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:04:39.033680) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (18:05:01.983260) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:05:01.985083) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:05:01.985236) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (18:06:59.411891) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:06:59.413842) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:06:59.414007) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (18:09:38.631302) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:09:38.633125) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:09:38.633271) - [SERVER] Received user command: 'test t64' Details: (root: 'test', first: 't64', second: '', other: '')
+[INFO] (18:25:35.820739) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:25:35.822765) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:25:35.822918) - [SERVER] Received user command: 'test t64e' Details: (root: 'test', first: 't64e', second: '', other: '')
+[INFO] (18:25:40.804575) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:25:40.806920) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:25:40.807064) - [SERVER] Received user command: 'test t64d' Details: (root: 'test', first: 't64d', second: '', other: '')
+[INFO] (18:26:49.458477) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:26:49.460165) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:26:49.460314) - [SERVER] Received user command: 'test t64e' Details: (root: 'test', first: 't64e', second: '', other: '')
+[INFO] (18:33:42.983076) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (18:33:42.990295) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'safe'
+
+[ERROR] (18:33:42.993062) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'safe'
+
+[INFO] (18:33:42.994247) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:33:42.994390) - [SERVER] Received user command: 'safe FAQ' Details: (root: 'safe', first: 'FAQ', second: '', other: '')
+[INFO] (18:33:53.942972) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (18:33:53.946119) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'safe'
+
+[ERROR] (18:33:53.948855) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'safe'
+
+[INFO] (18:33:53.949815) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:33:53.949931) - [SERVER] Received user command: 'safe FAQ' Details: (root: 'safe', first: 'FAQ', second: '', other: '')
+[INFO] (18:34:27.326015) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (18:34:27.327739) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (18:34:27.327886) - [SERVER] Received user command: 'test t64e' Details: (root: 'test', first: 't64e', second: '', other: '')
+[INFO] (19:34:41.817812) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (19:34:41.824464) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'triplex64'
+
+[ERROR] (19:34:41.827802) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'triplex64'
+
+[INFO] (19:34:41.828282) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:34:41.828398) - [SERVER] Received user command: 'triplex64 Hi!' Details: (root: 'triplex64', first: 'Hi!', second: '', other: '')
+[INFO] (19:35:10.264957) - [OK] Plugin #734 (ui.api.send_message) executed
+[ERROR] (19:35:10.270093) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'triplex64'
+
+[ERROR] (19:35:10.275147) - [SERVER] Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat_server.py", line 98, in proceed_command
+    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\chat\vadim_chat.py", line 72, in get_user
+    return self.communicator.clients[self.communicator.shortcuts[name]]
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'triplex64'
+
+[INFO] (19:35:10.275752) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:35:10.275878) - [SERVER] Received user command: 'triplex64 Hi!' Details: (root: 'triplex64', first: 'Hi!', second: '', other: '')
+[INFO] (19:35:48.512088) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:35:48.513796) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:35:48.513937) - [SERVER] Received user command: 'triplex64 Hi!' Details: (root: 'triplex64', first: 'Hi!', second: '', other: '')
+[INFO] (19:36:04.591033) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:36:04.592892) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:36:04.593026) - [SERVER] Received user command: 'triplex64 !iH' Details: (root: 'triplex64', first: '!iH', second: '', other: '')
+[INFO] (19:49:30.424955) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:30.426608) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:30.426758) - [SERVER] Received user command: 'triplex64 Hello!' Details: (root: 'triplex64', first: 'Hello!', second: '', other: '')
+[INFO] (19:49:33.504671) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:33.506228) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:33.506372) - [SERVER] Received user command: 'triplex64 Hello!' Details: (root: 'triplex64', first: 'Hello!', second: '', other: '')
+[INFO] (19:49:37.440669) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:37.442296) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:37.442445) - [SERVER] Received user command: 'triplex64 Hello!' Details: (root: 'triplex64', first: 'Hello!', second: '', other: '')
+[INFO] (19:49:43.615372) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:43.616894) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:43.617025) - [SERVER] Received user command: 'triplex64 Hi!' Details: (root: 'triplex64', first: 'Hi!', second: '', other: '')
+[INFO] (19:49:45.624534) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:45.626164) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:45.626300) - [SERVER] Received user command: 'triplex64 Hi!' Details: (root: 'triplex64', first: 'Hi!', second: '', other: '')
+[INFO] (19:49:57.744203) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:49:57.745971) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:49:57.746173) - [SERVER] Received user command: 'triplex64 Hello?' Details: (root: 'triplex64', first: 'Hello?', second: '', other: '')
+[INFO] (19:50:26.400976) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:50:26.402735) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:50:26.402862) - [SERVER] Received user command: 'triplex64 Helo!' Details: (root: 'triplex64', first: 'Helo!', second: '', other: '')
+[INFO] (19:50:50.290316) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:50:50.291935) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:50:50.292095) - [SERVER] Received user command: 'triplex64 Нello!' Details: (root: 'triplex64', first: 'Нello!', second: '', other: '')
+[INFO] (19:54:55.671962) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:54:55.723746) - [UI] [SERVER] Сообщение отправлено: triplex64 Iello!
+[INFO] (19:55:03.207776) - [OK] Plugin #734 (ui.api.send_message) executed
+[INFO] (19:55:03.209787) - [OK] Plugin #1331 (server.command_proceed) executed
+[INFO] (19:55:03.209969) - [SERVER] Received user command: 'triplex64 Iello!' Details: (root: 'triplex64', first: 'Iello!', second: '', other: '')

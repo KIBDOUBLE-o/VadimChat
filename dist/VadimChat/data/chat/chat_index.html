@@ -1,0 +1,122 @@
+<!-- source:body_main -->
+
+<button id="minimizeBtn">−</button>
+
+<div id="menu">
+    <h2>Vadim Chat</h2>
+    <div id="versionText">ERROR</div>
+    <button id="createBtn">Создать комнату</button>
+    <button id="joinBtn">Подключиться</button>
+    <button id="reconnectBtn">Подключиться к недавней</button>
+
+    <div class="top-right-buttons">
+        <button id="settingsBtn" class="top-button" data-tooltip="Настройки">⚙️</button>
+        <button id="pluginsTopBtn" class="top-button" data-tooltip="Плагины">🔌</button>
+        <button id="serversTopBtn" class="top-button" data-tooltip="Комнаты">🌐</button>
+        <button id="errorsTopBtn" class="top-button" data-tooltip="Ошибки плагинов">🐞</button>
+    </div>
+    <!-- source:body_menu -->
+</div>
+
+<div id="errorsMenu" class="window-container" style="display:none;">
+    <div class="window-content">
+        <div class="window-header">
+            <h2 class="window-title">🐞 Лог ошибок</h2>
+            <button id="closeErrorsBtn" class="window-close-btn">✖</button>
+        </div>
+        
+        <div class="window-controls">
+            <button id="clearErrorsBtn" class="window-control-btn">🗑 Очистить все</button>
+        </div>
+        
+        <div id="errorsList" class="window-list"></div>
+    </div>
+</div>
+
+<div id="pluginsMenu" class="window-container" style="display:none;">
+    <div class="window-content">
+        <div class="window-header">
+            <h2 class="window-title">🔌 Управление плагинами</h2>
+            <button id="closePluginsBtn" class="window-close-btn">✖</button>
+        </div>
+        
+        <div class="window-tabs">
+            <button id="pluginsTabActive" class="window-tab active">Активные</button>
+            <button id="pluginsTabAll" class="window-tab">Все плагины</button>
+            <button id="pluginsTabStore" class="window-tab">Магазин</button>
+        </div>
+        
+        <div class="window-controls">
+            <button id="refreshPluginsBtn" class="window-control-btn">🔄 Обновить</button>
+        </div>
+        
+        <div id="pluginsList" class="window-list"></div>
+    </div>
+</div>
+
+<div id="serversMenu" class="window-container" style="display:none;">
+    <div class="window-content">
+        <div class="window-header">
+            <h2 class="window-title">🌐 Комнаты</h2>
+            <button id="closeServersBtn" class="window-close-btn">✖</button>
+        </div>
+        
+        <div class="window-controls">
+            <button id="refreshServersBtn" class="window-control-btn">🔄 Обновить</button>
+            <button id="clearServersBtn" class="window-control-btn">🗑 Очистить</button>
+        </div>
+        
+        <div id="serversList" class="window-list"></div>
+    </div>
+</div>
+
+<div id="settingsMenu" class="window-container" style="display:none;">
+    <div class="window-content">
+        <div class="window-header">
+            <h2 class="window-title">⚙️ Настройки</h2>
+            <button id="closeSettingsBtn" class="window-close-btn">✖</button>
+        </div>
+        
+        <div class="window-tabs">
+            <button id="basicTab" class="window-tab active">Основные</button>
+            <button id="advancedTab" class="window-tab">Расширенные</button>
+        </div>
+        
+        <div class="window-controls">
+            <button id="applySettingsBtn" class="window-control-btn">💾 Применить</button>
+        </div>
+        
+        <div id="basicSettings" class="window-list"></div>
+        <div id="advancedSettings" class="window-list" style="display:none;"></div>
+    </div>
+</div>
+
+<div id="joinForm" style="display:none; flex-direction:column; align-items:center;">
+    <!-- source:body_join -->
+    <input type="text" id="joinKey" placeholder="Введите ключ">
+    <input type="text" id="joinName" placeholder="Введите имя">
+    <button id="connectBtn">Подключиться</button>
+</div>
+
+<div id="chat" style="display:none;">
+    <!-- source:body_chat -->
+    <div id="messages"></div>
+    <div id="inputbar">
+        <input type="text" id="msg" placeholder="Введите сообщение">
+        <button onclick="acceptMessage()">Отправить</button>
+        <button id="toggleDebugBtn">🐞</button>
+        <button id="leaveBtn" onclick="if(confirm('Выйти из чата?')) exitChat();">Выйти</button>
+    </div>
+
+    <div id="debugPanel">
+        <div id="debugHeader">
+            <span>Debug Console</span>
+            <button id="closeDebugBtn">✖</button>
+        </div>
+        <div id="debugMessages"></div>
+        <div id="debugInputBar">
+            <input type="text" id="debugInput" placeholder="Введите команду или сообщение">
+            <button id="debugSendBtn">▶</button>
+        </div>
+    </div>
+</div>

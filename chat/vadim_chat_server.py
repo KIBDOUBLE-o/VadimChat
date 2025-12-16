@@ -6,8 +6,8 @@ from chunked.chunked_data import ChunkedData
 from logger.log_type import LogType
 from logger.logger import Logger
 from networking.client import Client
-from notificator import Notificator
 import traceback
+from chat.coding.triplex64 import encode_triplex64, decode_triplex64
 
 
 class VadimChatServer:
@@ -127,6 +127,14 @@ class VadimChatServer:
                 elif root == '$p':
                     pass
 
+                elif root == 'test':
+                    test_text = 'Hello! You are nigger!'
+                    te = encode_triplex64(test_text)
+                    if first == 't64e':
+                        self.callback.log(te, ChatMessageSource.Program, 'Server')
+                    elif first == 't64d':
+                        self.callback.log(decode_triplex64(te), ChatMessageSource.Program, 'Server')
+
 
             if root == 'btn':
                 self.callback.send_uni_all(f'{first};{second};{sother}', sender, 'button')
@@ -136,6 +144,18 @@ class VadimChatServer:
                     ['loh', '10', '1'],
                     ['nig', '11', '1']
                 ])
+            elif root == 'safe':
+                message = command[(len(root)+1):]
+                self.proceed_command(f':ssend {sender} py self.callback.ui.log("{message}", "me", "{sender}")')
+                self.proceed_command(f':ssend {sender} py self.callback.send_self("safe*{encode_triplex64(message)}", "{sender}")')
+                self.callback.log(message, ChatMessageSource.Other, sender)
+            elif root == 'triplex64':
+                message = command[(len(root) + 1):]
+                if not sender.startswith(root):
+                    self.proceed_command(f':ssend {sender} py self.callback.ui.log("{encode_triplex64(message)}", "me", "{sender}")')
+                    self.proceed_command(f':ssend {sender} py self.callback.send_self("safe*{encode_triplex64(message)}", "{sender}")')
+                else:
+                    self.callback.log(encode_triplex64(message), ChatMessageSource.Program, 'Server')
             elif root == 'help':
                 commands = [
                     ('ban', 'блокирует пользователя на время текущей сессии', ['shortcut']),

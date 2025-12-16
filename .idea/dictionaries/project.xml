@@ -2,6 +2,8 @@
   <dictionary name="project">
     <words>
       <w>addr</w>
+      <w>extramovedb</w>
+      <w>movedb</w>
       <w>uask</w>
     </words>
   </dictionary>

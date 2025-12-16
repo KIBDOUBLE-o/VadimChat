@@ -5,7 +5,7 @@ from chat.chat_message_source import ChatMessageSource
 from chunked.chunked_data import ChunkedData
 from chunked.chunked_type import ChunkedType
 from notificator import Notificator
-from plugins.plugin_applier import PluginApplier
+from chat.coding.triplex64 import decode_triplex64
 
 
 class ChunkedReceiverHelper:
@@ -49,7 +49,10 @@ class ChunkedReceiverHelper:
             self.assembling[sender].append(payload)
             full_message = "".join(self.assembling[sender])
             if data_type == "[msg]":
-                self.callback.log(full_message, ChatMessageSource.Other, sender)
+                if full_message.startswith('safe*'):
+                    self.callback.log(decode_triplex64(full_message), ChatMessageSource.Other, sender)
+                else:
+                    self.callback.log(full_message, ChatMessageSource.Other, sender)
                 if self.callback.is_hidden:
                     Notificator.notify(f"{sender} пишет", payload)
                 if self.callback.communicator.is_server: self.callback.make_history_impact(sender, full_message)
@@ -70,7 +73,10 @@ class ChunkedReceiverHelper:
         elif msg_type == ChunkedType.Both:
             full_message = payload
             if data_type == "[msg]":
-                self.callback.log(payload, ChatMessageSource.Other, sender)
+                if full_message.startswith('safe*'):
+                    self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
+                else:
+                    self.callback.log(payload, ChatMessageSource.Other, sender)
                 if self.callback.is_hidden:
                     Notificator.notify(f"{sender} пишет", payload)
             elif data_type == "[file]":

@@ -26,5 +26,25 @@
     {
         "master": "ouf1",
         "message": "[msg][msg][msg]||BOTH|asd"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|asdas"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|safe*70:\u008ae\u00c7\u00c4\u00cb\u00d7\u00e8\u010e\u010c\u00c2\u0119\u010d\u00e9\u00cd\u00d1\u00bb"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|safe*70:\u008ae\u00c7\u00c4\u00cb\u00d7\u00e8\u010e\u010c\u00c2\u0119\u010d\u00e9\u00cd\u00d1\u00bb"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|safe*70:\u008ae\u00c7\u00c4\u00cb\u00d7\u00e8\u010e\u010c\u00c2\u0119\u010d\u00e9\u00cd\u00d1\u00bb"
+    },
+    {
+        "master": "ouf1",
+        "message": "[msg][msg][msg]||BOTH|safe*70:\u008ae\u00c7\u00c4\u00cb\u00d7\u00e8\u010e\u010c\u00c2\u0119\u010d\u00e9\u00cd\u00d1\u00bb"
     }
 ]
