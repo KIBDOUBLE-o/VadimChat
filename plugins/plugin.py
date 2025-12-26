@@ -25,6 +25,15 @@ class Plugin:
     def get_path(name: str):
         return f'data/plugins/{name}'
 
+    @staticmethod
+    def get_plugin_script(plugins: list, url: str) -> PythonHook or None:
+        for plugin in plugins:
+            for hook in plugin.python:
+                hook: PythonHook
+                if hook.url == url:
+                    return hook
+        return None
+
     def continue_loading(self, dependency_check):
         plugin_path = Plugin.get_path(self.path_name)
         try:
@@ -37,9 +46,23 @@ class Plugin:
                         return f'A required dependency "{dependency}" is missing'
 
             for py in self.header["py"]:
-                self.python.append(PythonHook(py["hook"], open(f'{plugin_path}/{py["path"]}.py', encoding='utf-8').read()))
+                paths = []
+                if type(py["path"]) is list:
+                    paths = py["path"]
+                else:
+                    paths.append(py["path"])
+                for path in paths:
+                    url = f'{self.id}:{path.replace('\\', '/')}'
+                    hook = PythonHook(py["hook"], open(f'{plugin_path}/{path}.py', encoding='utf-8').read(), url)
+                    self.python.append(hook)
             for web in self.header["webview"]:
-                self.webview.append((web["source"], open(f'{plugin_path}/{web["path"]}', encoding='utf-8').read(), {}))
+                paths = []
+                if web["path"] is list:
+                    paths = web["path"]
+                else:
+                    paths.append(web["path"])
+                for path in paths:
+                    self.webview.append((web["source"], open(f'{plugin_path}/{path}', encoding='utf-8').read()))
             return ''
         except:
             return traceback.format_exc()

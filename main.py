@@ -7,5 +7,5 @@ if __name__ == "__main__":
     plugin_manager = PluginManager()
     plugin_manager.load_plugins()
 
-    chat = VadimChatUI("1.2.6 Release", plugin_manager)
+    chat = VadimChatUI("1.2.7 Release", plugin_manager)
     chat.run()

@@ -1,1 +1,0 @@
-self.chat.send_uni('Hello World', 'Example', 'Thread1')

@@ -696,3 +696,587 @@ KeyError: 'triplex64'
 [INFO] (19:55:03.207776) - [OK] Plugin #734 (ui.api.send_message) executed
 [INFO] (19:55:03.209787) - [OK] Plugin #1331 (server.command_proceed) executed
 [INFO] (19:55:03.209969) - [SERVER] Received user command: 'triplex64 Iello!' Details: (root: 'triplex64', first: 'Iello!', second: '', other: '')
+[INFO] (23:55:34.728029) - [OK] Plugin #36 (ui.init) executed
+[INFO] (23:55:37.134053) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (23:57:09.409201) - [OK] Plugin #36 (ui.init) executed
+[INFO] (23:57:10.295356) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (23:57:49.517599) - [OK] Plugin #36 (ui.init) executed
+[INFO] (23:57:50.460076) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:01:18.144461) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:01:19.265112) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:02:36.603991) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:02:37.504272) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:22:38.453374) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:22:39.922362) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:24:06.211757) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:24:07.060077) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:25:09.926742) - [OK] Plugin #36 (ui.init) executed
+[ERROR] (00:25:10.760250) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #44 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+link('test:py/on_init', 'test', text='text')
+--------------------------------------------------------------------------------
+❗ Тип ошибки: AttributeError
+❗ Сообщение: 'dict' object has no attribute 'target'
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 66, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 63, in <lambda>
+    _locals['link'] = lambda url, target, **kwargs: self.call_plugin_method(url, target, **kwargs)
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 51, in call_plugin_method
+    print(f'Calling {local} and it {hasattr(local, target)} and {callable(local.target)}')
+                                                                          ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'target'
+
+================================================================================
+
+[INFO] (00:26:41.856157) - [OK] Plugin #36 (ui.init) executed
+[ERROR] (00:26:42.646299) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #44 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+link('test:py/on_init', 'test', text='text')
+--------------------------------------------------------------------------------
+❗ Тип ошибки: AttributeError
+❗ Сообщение: 'dict' object has no attribute 'target'
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 67, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 64, in <lambda>
+    _locals['link'] = lambda url, target, **kwargs: self.call_plugin_method(url, target, **kwargs)
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 51, in call_plugin_method
+    print(f'Calling {local} and it {hasattr(local, target)} and {callable(local.target)}')
+                                                                          ^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'target'
+
+================================================================================
+
+[INFO] (00:27:03.937638) - [OK] Plugin #36 (ui.init) executed
+[ERROR] (00:27:04.756652) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #44 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+link('test:py/on_init', 'test', text='text')
+--------------------------------------------------------------------------------
+❗ Тип ошибки: AttributeError
+❗ Сообщение: 'dict' object has no attribute 'test'
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 67, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 64, in <lambda>
+    _locals['link'] = lambda url, target, **kwargs: self.call_plugin_method(url, target, **kwargs)
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 51, in call_plugin_method
+    attr = getattr(local, target)
+AttributeError: 'dict' object has no attribute 'test'
+
+================================================================================
+
+[INFO] (00:28:44.292826) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:28:45.083796) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:29:30.102497) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:29:30.928848) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:29:58.616995) - [OK] Plugin #36 (ui.init) executed
+[INFO] (00:29:59.442741) - [OK] Plugin #44 (ui.on_loaded) executed
+[INFO] (00:31:56.725350) - [OK] Plugin #39 (ui.init) executed
+[INFO] (00:31:57.562352) - [OK] Plugin #111 (ui.on_loaded) executed
+[INFO] (00:32:36.625660) - [OK] Plugin #39 (ui.init) executed
+[INFO] (00:32:37.739929) - [OK] Plugin #111 (ui.on_loaded) executed
+[INFO] (00:33:35.783059) - [OK] Plugin #39 (ui.init) executed
+[INFO] (00:33:36.560789) - [OK] Plugin #149 (ui.on_loaded) executed
+[INFO] (12:50:53.596411) - [OK] Plugin #39 (ui.init) executed
+[ERROR] (12:50:55.373957) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #190 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'hook' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 74, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 6, in <module>
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 72, in <lambda>
+    _locals['load'] = lambda url: set_local(self.load_hook_local(hook.local, url))
+                                  ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 69, in set_local
+    hook.local = {**hook.local, **new}
+                    ^^^^
+NameError: name 'hook' is not defined
+
+================================================================================
+
+[INFO] (13:01:28.959929) - [OK] Plugin #39 (ui.init) executed
+[ERROR] (13:01:29.686611) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #190 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'a' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 75, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in <module>
+NameError: name 'a' is not defined
+
+================================================================================
+
+[INFO] (13:05:48.303758) - [OK] Plugin #39 (ui.init) executed
+[ERROR] (13:05:49.010997) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #190 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'a' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 78, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in <module>
+NameError: name 'a' is not defined
+
+================================================================================
+
+[INFO] (13:12:01.323056) - [OK] Plugin #39 (ui.init) executed
+[INFO] (13:12:02.057508) - [OK] Plugin #190 (ui.on_loaded) executed
+[INFO] (13:25:55.588506) - [OK] Plugin #39 (ui.init) executed
+[INFO] (13:25:56.329713) - [OK] Plugin #190 (ui.on_loaded) executed
+[ERROR] (13:28:23.171118) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #203 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: AttributeError
+❗ Сообщение: 'NoneType' object has no attribute 'local'
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 82, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 6, in <module>
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 75, in <lambda>
+    _locals['load'] = lambda url: set_local(self.load_hook_local(hook.local, url))
+                                            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 60, in load_hook_local
+    local = Plugin.get_plugin_script(self.plugins, url).local
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'local'
+
+================================================================================
+
+[ERROR] (13:30:29.451980) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #203 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'a' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 84, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in <module>
+NameError: name 'a' is not defined
+
+================================================================================
+
+[ERROR] (13:36:37.408236) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #203 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'a' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 88, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in <module>
+NameError: name 'a' is not defined
+
+================================================================================
+
+[ERROR] (13:50:15.859114) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #203 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'a' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 94, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in <module>
+NameError: name 'a' is not defined
+
+================================================================================
+
+[ERROR] (13:50:42.283619) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 94, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[ERROR] (13:52:07.681890) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[ERROR] (13:53:37.263107) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[ERROR] (13:53:58.229160) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[ERROR] (13:54:22.611927) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[ERROR] (13:55:11.405424) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined
+
+================================================================================
+
+[INFO] (13:58:31.993009) - [OK] Plugin #39 (ui.init) executed
+[ERROR] (13:58:31.994043) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #67 (hook: ui.init)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+make_global()
+def g_test(text):
+    print(f'g_{text}')
+
+g_a = 1002
+
+--------------------------------------------------------------------------------
+❗ Тип ошибки: ValueError
+❗ Сообщение: too many values to unpack (expected 2)
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 96, in call_python_hook
+    for key, value in hook.local:
+        ^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+
+================================================================================
+
+[ERROR] (13:58:32.722359) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined. Did you mean: 'test'?
+
+================================================================================
+
+[INFO] (13:59:04.605794) - [OK] Plugin #39 (ui.init) executed
+[ERROR] (13:59:04.606830) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #67 (hook: ui.init)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+make_global()
+def g_test(text):
+    print(f'g_{text}')
+
+g_a = 1002
+
+--------------------------------------------------------------------------------
+❗ Тип ошибки: ValueError
+❗ Сообщение: too many values to unpack (expected 2)
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 96, in call_python_hook
+    for key, value in hook.local:
+        ^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+
+================================================================================
+
+[ERROR] (13:59:05.278964) - 
+================================================================================[ERROR] Ошибка во время выполнения plugin #204 (hook: ui.on_loaded)
+--------------------------------------------------------------------------------
+🧩 Код плагина:
+# link('test:py/on_init', 'test', text='text')
+# def a(): link('test:py/on_init', 'test', text=link('test:py/on_init', 'a'))
+
+# for i in range(10):
+#     a()
+load('test:py/on_init')
+#print(a)
+
+g_test(g_a)
+--------------------------------------------------------------------------------
+❗ Тип ошибки: NameError
+❗ Сообщение: name 'g_test' is not defined
+--------------------------------------------------------------------------------
+📌 Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KIT_\Documents\Python\VadimChat\plugins\plugin_manager.py", line 92, in call_python_hook
+    exec(hook.code, hook.local, hook.local)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 9, in <module>
+NameError: name 'g_test' is not defined. Did you mean: 'test'?
+
+================================================================================
+
+[INFO] (14:01:08.520874) - [OK] Plugin #39 (ui.init) executed
+[INFO] (14:01:08.527898) - [OK] Plugin #67 (ui.init) executed
+[INFO] (14:01:09.353820) - [OK] Plugin #204 (ui.on_loaded) executed
+[INFO] (14:01:39.971465) - [OK] Plugin #39 (ui.init) executed
+[INFO] (14:01:39.976486) - [OK] Plugin #67 (ui.init) executed
+[INFO] (14:01:40.725710) - [OK] Plugin #204 (ui.on_loaded) executed
+[INFO] (14:01:52.396373) - [OK] Plugin #39 (ui.init) executed
+[INFO] (14:01:52.396608) - [OK] Plugin #67 (ui.init) executed
+[INFO] (14:01:53.054234) - [OK] Plugin #204 (ui.on_loaded) executed
+[INFO] (14:03:33.788407) - [OK] Plugin #39 (ui.init) executed
+[INFO] (14:03:33.788705) - [OK] Plugin #67 (ui.init) executed
+[INFO] (14:03:34.552140) - [OK] Plugin #205 (ui.on_loaded) executed
+[INFO] (14:03:45.589556) - [OK] Plugin #39 (ui.init) executed
+[INFO] (14:03:45.589811) - [OK] Plugin #67 (ui.init) executed
+[INFO] (14:03:46.357171) - [OK] Plugin #203 (ui.on_loaded) executed

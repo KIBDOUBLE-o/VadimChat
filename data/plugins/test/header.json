@@ -6,6 +6,14 @@
     "description": "nothing",
     "dependencies": [],
     "py": [
+        {
+            "hook": "ui.on_loaded",
+            "path": "py/test"
+        },
+        {
+            "hook": "ui.init",
+            "path": ["py/on_init", "py/glob"]
+        }
     ],
     "webview": [
     ]
