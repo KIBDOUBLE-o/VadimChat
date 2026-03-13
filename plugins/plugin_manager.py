@@ -1,16 +1,18 @@
 import os
 from traceback import format_exc
 
+from addition import find_similar
 from appdata import AppData
-from logger.log_type import LogType
-from logger.logger import Logger
+from debugging.log_type import LogType
+from debugging.logger import Logger
 from plugins.plugin import Plugin
 from plugins.plugin_applier import PluginApplier
 from plugins.python_hook import PythonHook
 
 
 class PluginManager:
-    def __init__(self):
+    def __init__(self, version):
+        self.version = version
         self.plugins = []
         self.errors = []
         self.env = {}
@@ -21,9 +23,9 @@ class PluginManager:
         plugins = []
         for name in os.listdir("data/plugins"):
             plugin = Plugin()
-            self.errors.append((name, plugin.load_header(name)))
+            self.errors.append((name, plugin.load_header(name, self.version)))
             plugins.append(plugin)
-        print(f'Header loading: {', '.join([str(plugin) for plugin in plugins])}')
+        print(f'Header loading: \n -{'\n -'.join([str(plugin) for plugin in plugins])}')
         for plugin in plugins:
             try:
                 self.errors.append((plugin.header["id"], plugin.continue_loading(lambda id: self.containment_check(id))))
@@ -48,14 +50,24 @@ class PluginManager:
     def containment_check(self, id):
         return len([plugin for plugin in self.plugins if plugin.header["id"] == id]) > 0
 
-    def call_plugin_method(self, url: str, target: str, **kwargs):
-        local = Plugin.get_plugin_script(self.plugins, url).local
-        if target in local:
-            if callable(local[target]):
-                return local[target](**kwargs)
-            else:
-                return local[target]
+    def call_plugin_method(self, url: str, target: str, args: list):
+        hook = Plugin.get_plugin_script(self.plugins, url)
+        if hook:
+            local = hook.local
+            if target in local:
+                if callable(local[target]):
+                    return local[target](*args)
+                else:
+                    return local[target]
+        print(f"Unknown url: {url} did you mean: {self.find_similar_url(url)}?")
         return None
+
+    def find_similar_url(self, url) -> str:
+        variants = []
+        for plugin in self.plugins:
+            for hook in plugin.python:
+                variants.append(hook.url)
+        return find_similar(url, variants)
 
     def load_hook_local(self, i_local: dict, url: str) -> dict:
         script = Plugin.get_plugin_script(self.plugins, url)
@@ -81,7 +93,7 @@ class PluginManager:
                     self.make_it_global = True
 
                 _locals['self'] = _self
-                _locals['link'] = lambda url, target, **kwargs: self.call_plugin_method(url, target, **kwargs)
+                _locals['link'] = lambda url, target, args: self.call_plugin_method(url, target, args)
                 _locals['load'] = load
                 _locals['make_global'] = make_global
 

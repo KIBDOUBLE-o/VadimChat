@@ -1,7 +1,8 @@
+import sys
 from datetime import datetime
 
 from appdata import AppData
-from logger.log_type import LogType
+from debugging.log_type import LogType
 
 
 class Logger:

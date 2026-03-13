@@ -4,6 +4,8 @@ import subprocess
 import sys
 import threading
 import traceback
+from threading import Thread
+from time import sleep
 
 from PIL import Image
 import pystray
@@ -11,10 +13,11 @@ import pystray
 import webview
 from appdata import AppData
 from chat.vadim_chat import VadimChat
-from logger.log_type import LogType
-from logger.logger import Logger
+from debugging.log_type import LogType
+from debugging.logger import Logger
+from debugging.state_manager import StateManager
 from networking.communicator_mode import CommunicatorMode
-from addition import pack_file
+from addition import pack_file, verify_password
 from networking.network_communicator_finder import NetworkCommunicatorFinder
 from plugins.plugin import Plugin
 from plugins.plugin_applier import PluginApplier
@@ -23,14 +26,16 @@ from web.web_constructor import WebConstructor
 
 
 class VadimChatUI:
-    def __init__(self, version: str, plugin_manager: PluginManager):
+    def __init__(self, version: str, stage: str, plugin_manager: PluginManager):
         self.chat = VadimChat()
         self.hidden = False
         self.window = None
         self.LOG_ACCESS_LAMBDA = lambda msg, sender, name: self.log(msg, sender, name)
         self.version = version
+        self.full_version = f'{version} {stage}'
         self.plugin_manager = plugin_manager
         self.pinger = None
+        self.state_manager = StateManager(self, None)
 
     def log(self, msg: str, sender="other", name="Unknown"):
         self.plugin_manager.call_python_hook(self, 'ui.log:pre', locals(), globals())
@@ -153,9 +158,19 @@ class VadimChatUI:
         js_args = ", ".join(json.dumps(arg) for arg in args)
         self.window.evaluate_js(f"{func}({js_args});")
 
+    def add_stats_structure_element(self, data: dict, path: str):
+        self.call('addStructureElement', data, path)
+
+    def update_stats_structure(self, data: dict):
+        self.call('updateStateTree', data)
+
+    def clear_stats_structure(self):
+        self.call('clearStateTree')
+
     def on_loaded(self):
         settings = AppData.get_json("settings.json")
-        self.call("setVersion", self.version)
+        self.call("setVersion", self.full_version)
+        self.call("setState", True)
         self.call("setNickName", settings["nickname"])
         try:
             self.set_setting("default_ip", settings["default_ip"])
@@ -179,8 +194,23 @@ class VadimChatUI:
         for plugin_error in self.plugin_manager.errors:
             if plugin_error[1] == '': continue
             self.alert_plugin_error(plugin_error[0], plugin_error[1])
-        #self.pinger.start_scan_loop()
-        #self.pinger.start_visualize_loop(self)
+        self.state_manager.add = lambda name, t, value, path: self.add_stats_structure_element({"name":name, "type":t, "value":value}, path)
+        self.state_manager.update = lambda data: self.update_stats_structure(data)
+
+        password = "01670d17fc70d79529f0ac28e5866ec046afb978a0aad049380f374c22f4b819"
+        if verify_password(password, AppData.get_jvalue("config", "state_manager_key")):
+            self.call("activateStateButton")
+
+        # Thread(target=self.ui_loop, daemon=True).start()
+        self.state_manager.parse_internal_stats()
+
+    def ui_loop(self):
+        counter = 0
+        while True:
+            if counter % 100 == 0:
+                pass
+            counter+=1
+            sleep(0.334)
 
     def run(self):
         class Api:
@@ -213,8 +243,11 @@ class VadimChatUI:
                 print("SERVER LOG:")
 
             def join_chat(api_self, key, name):
+                print("asd")
                 self.plugin_manager.call_python_hook(self, 'ui.api.join_chat', locals(), globals())
+                print("asd")
                 self.chat = VadimChat(CommunicatorMode.Client, key=key, ui=self)
+                print("asd")
                 self.chat.run()
                 settings = AppData.get_json("settings.json")
                 settings["nickname"] = name
@@ -263,6 +296,9 @@ class VadimChatUI:
             def minimize(api_self):
                 self.minimize_to_tray(self.window)
 
+            def toggle_silence(api_self, state: bool):
+                self.chat.silence_mode = state
+
             def hook(api_self, hook_key: str, data: dict):
                 self.plugin_manager.call_python_hook(self, 'ui.api.new', locals(), globals())
 
@@ -279,6 +315,13 @@ class VadimChatUI:
                                 plugins_data[i]['enabled'] = state
                         AppData.set_json('plugins.json', plugins_data)
                         exit()
+
+            def on_state_edit(api_self, path: str, value):
+                """Вызывается из JS когда пользователь меняет значение в дереве"""
+                self.state_manager.apply_edit(path, value)
+
+            def on_state_call(api_self, path: str, args: list):
+                self.state_manager.on_state_call(path, args)
 
             def refresh_servers(api_self):
                 self.set_server_list([{'key': s['key'], 'name': s['source']} for s in self.pinger.find_servers()])

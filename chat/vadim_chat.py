@@ -21,6 +21,7 @@ class VadimChat:
         self.server = VadimChatServer(self)
         self.ui = ui
         self.key = key
+        self.silence_mode = False
         self.communicator = NetworkCommunicator(
             mode=mode,
             port=int(settings["port"]),
@@ -73,6 +74,10 @@ class VadimChat:
 
     def get_user_name(self, addr: (str, int)):
         return get_key(self.communicator.shortcuts, addr)
+    
+    def shutdown(self):
+        self.ui.window.destroy()
+        exit()
 
     def save_data(self, path: str, data):
         current = self.storage
@@ -266,11 +271,15 @@ class VadimChat:
 
     @staticmethod
     def plugins_update(self):
+        update_counter = 0
         while True:
-            self.ui.plugin_manager.call_python_hook(self, 'server.plugin_update', locals(), globals(), log=False)
+            if self.communicator.is_server: self.ui.plugin_manager.call_python_hook(self, 'server.plugin_update', locals(), globals(), log=False)
+            self.ui.plugin_manager.call_python_hook(self, 'chat.just_update', locals(), globals(), log=False)
+            if update_counter % 10 == 0:
+                self.ui.plugin_manager.call_python_hook(self, 'chat.rare_update', locals(), globals(), log=False)
             time.sleep(0.3334)
+            update_counter += 1
 
     def run(self):
         self.communicator.start()
-        if self.communicator.is_server:
-            Thread(target=self.plugins_update, args=(self,), daemon=True).start()
+        Thread(target=self.plugins_update, args=(self,), daemon=True).start()

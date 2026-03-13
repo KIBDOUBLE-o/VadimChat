@@ -9,7 +9,10 @@ const debugInput = document.getElementById("debugInput");
 const debugSendBtn = document.getElementById("debugSendBtn");
 
 const pluginsTopBtn = document.getElementById("pluginsTopBtn");
+const versionText = document.getElementById("versionText");
 const serversTopBtn = document.getElementById("serversTopBtn");
+
+silenceMode = false;
 
 disableDebug();
 
@@ -18,7 +21,6 @@ toggleDebugBtn.onclick = () => {
 };
 
 function setVersion(version) {
-    const versionText = document.getElementById("versionText");
     if (versionText) {
         versionText.textContent = "v" + version;
     }
@@ -62,6 +64,12 @@ const joinBtn = document.getElementById("joinBtn");
 const connectBtn = document.getElementById("connectBtn");
 const reconnectBtn = document.getElementById("reconnectBtn");
 const minimizeBtn = document.getElementById("minimizeBtn");
+const silenceModeBtn = document.getElementById("silenceModeBtn");
+const joinFormBackBtn = document.getElementById("joinFormBackBtn");
+const titleText = document.getElementById("title");
+const statePointer = document.getElementById("statePointer");
+const stateText = document.getElementById("stateText");
+const stateBadge = document.getElementById("stateBadge")
 
 createBtn.onclick = () => startChat("server");
 joinBtn.onclick = () => {
@@ -69,6 +77,10 @@ joinBtn.onclick = () => {
     joinBtn.style.display = "none";
     reconnectBtn.style.display = "none";
     joinForm.style.display = "flex";
+    stateBadge.style.display = "none";
+
+    titleText.style.display = "none";
+    versionText.style.display = "none";
 };
 connectBtn.onclick = () => {
     joinForm.style.display = "none";
@@ -84,9 +96,40 @@ reconnectBtn.onclick = () => {
     inputbar.style.display = "block";
 };
 
+joinFormBackBtn.onclick = () => {
+    joinForm.style.display = "none";
+    createBtn.style.display = "block";
+    joinBtn.style.display = "block";
+    reconnectBtn.style.display = "block";
+    stateBadge.style.display = "flex";
+    
+    titleText.style.display = "block";
+    versionText.style.display = "block";
+}
+
+
 minimizeBtn.onclick = () => {
     window.pywebview.api.minimize();
 };
+silenceModeBtn.onclick = () => {
+    if (silenceMode) silenceModeBtn.style.background = "rgba(0, 0, 0, 0.15)";
+    else silenceModeBtn.style.background = "rgba(255, 255, 255, 0.15)";
+    silenceMode = !silenceMode;
+    window.pywebview.api.toggle_silence(silenceMode);
+}
+
+function setState(state){
+    if (state)
+    {
+        statePointer.className = "online";
+        stateText.textContent = "Подключено";
+    }
+    else
+    {
+        statePointer.className = "offline";
+        stateText.textContent = "Отключено";
+    }
+}
 
 function startChat(mode, data = {}) {
     menu.style.display = "none";
@@ -114,6 +157,9 @@ function closeChat() {
     joinBtn.style.display = "";
     joinForm.style.display = "none";
     reconnectBtn.style.display = "block";
+    stateBadge.style.display = "flex";
+    titleText.style.display = "flex";
+    versionText.style.display = "flex";
 }
 
 function exitChat() {
@@ -160,16 +206,60 @@ function addMessage(text, sender, name="") {
     setTimeout(scrollToBottom, 200);
 }
 
+const messageHistory = [];
+let historyIndex = -1;
+
 function acceptMessage() {
     const inp = document.getElementById("msg");
     const val = inp.value.trim();
-    if(val) {
+    if (val) {
+        // Добавляем в историю (избегаем дубликатов подряд)
+        if (messageHistory.length === 0 || messageHistory[messageHistory.length - 1] !== val) {
+            messageHistory.push(val);
+        }
+        // Сбрасываем индекс — готовы к новому вводу
+        historyIndex = messageHistory.length;
+
         window.pywebview.api.send_message(val);
         inp.value = "";
     }
 }
+
 document.getElementById("msg").addEventListener("keypress", e => {
-    if(e.key === "Enter") acceptMessage();
+    if (e.key === "Enter") acceptMessage();
+});
+
+document.getElementById("msg").addEventListener("keydown", e => {
+    const inp = document.getElementById("msg");
+
+    if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (messageHistory.length === 0) return;
+
+        // Если только начали листать — сохраняем текущий текст
+        if (historyIndex === messageHistory.length) {
+            messageHistory._draft = inp.value;
+        }
+
+        if (historyIndex > 0) {
+            historyIndex--;
+            inp.value = messageHistory[historyIndex];
+        }
+    }
+
+    if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (messageHistory.length === 0) return;
+
+        if (historyIndex < messageHistory.length - 1) {
+            historyIndex++;
+            inp.value = messageHistory[historyIndex];
+        } else if (historyIndex === messageHistory.length - 1) {
+            // Возвращаемся к черновику
+            historyIndex = messageHistory.length;
+            inp.value = messageHistory._draft || "";
+        }
+    }
 });
 
 function clearMessages() {
@@ -854,6 +944,9 @@ function selectServer(server) {
     createBtn.style.display = "none";
     joinBtn.style.display = "none";
     reconnectBtn.style.display = "none";
+    stateBadge.style.display = "none";
+    titleText.style.display = "none";
+    versionText.style.display = "none";
 
     document.getElementById("joinKey").value = server.key;
 }
@@ -1098,3 +1191,366 @@ function escapeHtml(text) {
 window.addEventListener('load', () => {
     updateErrorBadge();
 });
+
+
+
+let statePanBtn = null;
+let statePan = null;
+let stateTree = null;
+let statePanState = false;
+let domReady = false;
+
+function initStatePanel() {
+    try {
+        statePanBtn = document.getElementById("statsBtn");
+        statePan = document.getElementById("stats");
+        stateTree = document.getElementById("statsTree");
+
+        if (!statePanBtn || !statePan || !stateTree) {
+            setTimeout(initStatePanel, 100);
+            return;
+        }
+
+        domReady = true;
+
+        statePanBtn.onclick = () => {
+            statePanState = !statePanState;
+            statePan.style.display = statePanState ? "block" : "none";
+        };
+    } catch (e) {
+        setTimeout(initStatePanel, 200);
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStatePanel);
+} else {
+    initStatePanel();
+}
+
+function activateStateButton() {
+    if (statePanBtn) statePanBtn.style.display = "block";
+}
+
+const stateNodes = {};
+const stateData = {};
+
+const stateCallbacks = {
+    onEdit(path, value) {
+        try {
+            if (window.pywebview && window.pywebview.api && window.pywebview.api.on_state_edit) {
+                window.pywebview.api.on_state_edit(path, value);
+            }
+        } catch (e) {}
+    }
+};
+
+function setData(path, value) {
+    try { stateData[path] = value; } catch (e) {}
+}
+
+function detectType(value) {
+    try {
+        if (value === null || value === undefined) return "str";
+        if (Array.isArray(value)) return "array";
+        if (typeof value === "object") {
+            if (value.__type__ === "function") return "function";
+            return "structure";
+        }
+        if (typeof value === "boolean") return "bool";
+        if (typeof value === "number") return Number.isInteger(value) ? "int" : "float";
+        return "str";
+    } catch (e) {
+        return "str";
+    }
+}
+
+function flattenData(data, basePath) {
+    basePath = basePath || "";
+    var result = [];
+    try {
+        for (var key in data) {
+            if (!data.hasOwnProperty(key)) continue;
+            var value = data[key];
+            var path = basePath ? basePath + "/" + key : key;
+            var type = detectType(value);
+
+            if (type === "function") {
+                var args = [];
+                try { args = value.args || []; } catch (e) {}
+                result.push({ path: path, data: { name: key, type: "function", args: args } });
+            } else if (type === "structure") {
+                result.push({ path: path, data: { name: key, type: "structure" } });
+                try { result = result.concat(flattenData(value, path)); } catch (e) {}
+            } else if (type === "array") {
+                result.push({ path: path, data: { name: key, type: "array" } });
+                try {
+                    for (var i = 0; i < value.length; i++) {
+                        var v = value[i];
+                        var p = path + "/" + i;
+                        var t = detectType(v);
+                        if (t === "function") {
+                            var a = [];
+                            try { a = v.args || []; } catch (e) {}
+                            result.push({ path: p, data: { name: i, type: "function", args: a } });
+                        } else if (t === "structure") {
+                            result.push({ path: p, data: { name: i, type: t } });
+                            try { result = result.concat(flattenData(v, p)); } catch (e) {}
+                        } else if (t === "array") {
+                            result.push({ path: p, data: { name: i, type: "array" } });
+                            try {
+                                var asObj = {};
+                                for (var idx = 0; idx < v.length; idx++) asObj[idx] = v[idx];
+                                result = result.concat(flattenData(asObj, p));
+                            } catch (e) {}
+                        } else {
+                            result.push({ path: p, data: { name: i, type: t, value: v } });
+                        }
+                    }
+                } catch (e) {}
+            } else {
+                result.push({ path: path, data: { name: key, type: type, value: value } });
+            }
+        }
+    } catch (e) {}
+    return result;
+}
+
+function createNode(name, data, path, parentType) {
+    var node = document.createElement("div");
+    node.className = "stats-node";
+
+    var header = document.createElement("div");
+    header.className = "stats-header";
+
+    var children = document.createElement("div");
+    children.className = "stats-children";
+
+    var arrow = document.createElement("span");
+    arrow.className = "stats-arrow";
+    arrow.innerText = "▶";
+
+    var nameEl = document.createElement("span");
+    nameEl.innerText = name;
+
+    var valueEl = document.createElement("span");
+    valueEl.className = "stats-value";
+
+    var editBtn = document.createElement("button");
+    editBtn.className = "stats-btn edit";
+    editBtn.innerText = "✏";
+
+    function renderValue() {
+        try {
+            if (data.type === "structure") {
+                valueEl.innerText = "{}";
+                arrow.style.visibility = "visible";
+            } else if (data.type === "array") {
+                valueEl.innerText = "[]";
+                arrow.style.visibility = "visible";
+            } else if (data.type === "function") {
+                var args = data.args || [];
+                valueEl.innerText = "f(" + args.join(", ") + ")";
+                arrow.style.visibility = "hidden";
+            } else {
+                valueEl.innerText = data.value !== undefined && data.value !== null ? data.value : "";
+                arrow.style.visibility = "hidden";
+            }
+        } catch (e) {
+            valueEl.innerText = "";
+        }
+    }
+
+    renderValue();
+
+    header.onclick = function (e) {
+        try {
+            if (e.target !== header && e.target !== arrow && e.target !== nameEl) return;
+            if (data.type === "structure" || data.type === "array") {
+                node.classList.toggle("open");
+            }
+        } catch (e) {}
+    };
+
+    editBtn.onclick = function (e) {
+        try {
+            e.stopPropagation();
+            if (data.type === "array" || data.type === "structure" || data.type === "function") return;
+
+            var input = document.createElement("input");
+            input.className = "stats-input";
+            input.value = data.value !== undefined && data.value !== null ? data.value : "";
+
+            valueEl.innerHTML = "";
+            valueEl.appendChild(input);
+            input.focus();
+
+            function commitEdit() {
+                try {
+                    var v = input.value;
+                    if (data.type === "int") v = parseInt(v) || 0;
+                    if (data.type === "float") v = parseFloat(v) || 0;
+                    if (data.type === "bool") v = v === "true";
+                    data.value = v;
+                    setData(path, v);
+                    renderValue();
+                    stateCallbacks.onEdit(path, v);
+                } catch (e) {
+                    renderValue();
+                }
+            }
+
+            input.onchange = commitEdit;
+            input.onkeydown = function (ev) {
+                if (ev.key === "Enter") { commitEdit(); input.blur(); }
+                if (ev.key === "Escape") { renderValue(); }
+            };
+            input.onblur = function () { renderValue(); };
+        } catch (e) {}
+    };
+
+    header.appendChild(arrow);
+    header.appendChild(nameEl);
+    header.appendChild(valueEl);
+
+    if (data.type !== "structure" && data.type !== "array" && data.type !== "function") {
+        header.appendChild(editBtn);
+    }
+
+    node.appendChild(header);
+    node.appendChild(children);
+
+    return { node: node, children: children, nameEl: nameEl, data: data, path: path, parentType: parentType };
+}
+
+function addStructureElement(data, path) {
+    try {
+        if (!stateTree) return;
+
+        var parts = path.split("/");
+        var name = parts[parts.length - 1];
+
+        var parentContainer = stateTree;
+        var currentPath = "";
+        var parentType = null;
+
+        for (var i = 0; i < parts.length - 1; i++) {
+            currentPath += (i === 0 ? "" : "/") + parts[i];
+            if (!stateNodes[currentPath]) {
+                var obj = createNode(parts[i], { type: "structure" }, currentPath, parentType);
+                parentContainer.appendChild(obj.node);
+                stateNodes[currentPath] = obj;
+            }
+            parentType = stateNodes[currentPath] && stateNodes[currentPath].data
+                ? stateNodes[currentPath].data.type
+                : "structure";
+            parentContainer = stateNodes[currentPath].children;
+        }
+
+        var nodeObj = createNode(name, data, path, parentType);
+        parentContainer.appendChild(nodeObj.node);
+        stateNodes[path] = nodeObj;
+        setData(path, data.value);
+    } catch (e) {}
+}
+
+function clearStateTree() {
+    try {
+        if (stateTree) stateTree.innerHTML = "";
+        for (var key in stateNodes) delete stateNodes[key];
+        for (var key in stateData) delete stateData[key];
+    } catch (e) {}
+}
+
+function treesEqual(data) {
+    try {
+        var flat = flattenData(data);
+        var newPaths = {};
+        for (var i = 0; i < flat.length; i++) newPaths[flat[i].path] = flat[i];
+
+        var oldKeys = Object.keys(stateNodes);
+
+        if (flat.length !== oldKeys.length) return false;
+
+        for (var j = 0; j < oldKeys.length; j++) {
+            if (!newPaths[oldKeys[j]]) return false;
+        }
+
+        for (var k = 0; k < flat.length; k++) {
+            var item = flat[k];
+            var node = stateNodes[item.path];
+            if (!node) return false;
+            if (item.data.type !== node.data.type) return false;
+            if (item.data.value !== undefined && item.data.value !== node.data.value) return false;
+        }
+
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+var _pendingUpdate = null;
+var _updateTimer = null;
+
+function updateStateTree(data) {
+    try {
+        if (!domReady || !stateTree) {
+            _pendingUpdate = data;
+            if (!_updateTimer) {
+                _updateTimer = setTimeout(function () {
+                    _updateTimer = null;
+                    if (_pendingUpdate) {
+                        var d = _pendingUpdate;
+                        _pendingUpdate = null;
+                        updateStateTree(d);
+                    }
+                }, 200);
+            }
+            return;
+        }
+
+        if (treesEqual(data)) return;
+
+        var flat = flattenData(data);
+        var validPaths = {};
+        for (var i = 0; i < flat.length; i++) validPaths[flat[i].path] = true;
+
+        for (var j = 0; j < flat.length; j++) {
+            var item = flat[j];
+            if (!stateNodes[item.path]) {
+                addStructureElement(item.data, item.path);
+            } else {
+                var nd = stateNodes[item.path];
+                var isLeaf = item.data.type !== "structure" && item.data.type !== "array" && item.data.type !== "function";
+                if (isLeaf && nd.data.value !== item.data.value) {
+                    nd.data.value = item.data.value;
+                    setData(item.path, item.data.value);
+                    try {
+                        var val = nd.node.querySelector(".stats-value");
+                        if (val && document.activeElement !== val.querySelector("input")) {
+                            val.innerText = item.data.value;
+                        }
+                    } catch (e) {}
+                }
+            }
+        }
+
+        var allKeys = Object.keys(stateNodes);
+        var toRemove = [];
+        for (var k = 0; k < allKeys.length; k++) {
+            if (!validPaths[allKeys[k]]) toRemove.push(allKeys[k]);
+        }
+        toRemove.sort(function (a, b) { return b.split("/").length - a.split("/").length; });
+        for (var m = 0; m < toRemove.length; m++) {
+            try {
+                var rn = stateNodes[toRemove[m]];
+                if (rn && rn.node && rn.node.parentNode) {
+                    rn.node.parentNode.removeChild(rn.node);
+                }
+                delete stateNodes[toRemove[m]];
+                delete stateData[toRemove[m]];
+            } catch (e) {}
+        }
+    } catch (e) {}
+}

@@ -3,8 +3,8 @@ from appdata import AppData
 from chat.chat_message_source import ChatMessageSource
 from chat.chunked_receiving_helper import ChunkedReceiverHelper
 from chunked.chunked_data import ChunkedData
-from logger.log_type import LogType
-from logger.logger import Logger
+from debugging.log_type import LogType
+from debugging.logger import Logger
 from networking.client import Client
 import traceback
 from chat.coding.triplex64 import encode_triplex64, decode_triplex64
@@ -19,6 +19,7 @@ class VadimChatServer:
     def client_processing_start(self, client: Client, silence):
         try:
             if not silence: self.callback.ui.plugin_manager.call_python_hook(self, 'server.client_processing_start', locals(), globals())
+            if not silence: self.callback.ui.plugin_manager.call_python_hook(self, 'server.on_client_net_operation', locals(), globals())
             if not silence: self.callback.log(f"Пользователь '{get_key(self.callback.communicator.shortcuts, client.addr)}' подключён", ChatMessageSource.Program, "Server")
             #client.send(f"[history]{json.dumps(AppData.get_json("history.json"))}")
             if not silence: Logger.log("[SERVER] New client accepted!", LogType.INFO)
@@ -42,12 +43,13 @@ class VadimChatServer:
             self.crh.add(f"{receiver_name}/{msg}")
             self.crh.update_received_messages()
             if msg_part.startswith("--"): return
-            self.callback.make_history_impact(receiver_name, f"{simple.type}{msg}")
+            # self.callback.make_history_impact(receiver_name, f"{simple.type}{msg}")
         except:
             Logger.log('[SERVER] ' + traceback.format_exc(), LogType.ERROR)
 
     def on_client_disconnect(self, client: Client):
         self.callback.ui.plugin_manager.call_python_hook(self, 'server.on_client_disconnect:pre', locals(), globals())
+        self.callback.ui.plugin_manager.call_python_hook(self, 'server.on_client_net_operation', locals(), globals())
         self.callback.log(f"Пользователь '{self.callback.get_user_name(client.addr)}' отключился!", ChatMessageSource.Program, "Server")
 
     def proceed_command(self, command, op=True):
@@ -74,7 +76,7 @@ class VadimChatServer:
                     self.callback.log(f"Пользователь '{first}' заблокирован!", ChatMessageSource.Program, "Server")
                 elif root == "unban":
                     self.callback.communicator.unban(self.callback.get_user(first).addr)
-                    self.callback.log(f"Пользоваель '{first}' разблокирован!", ChatMessageSource.Program, "Server")
+                    self.callback.log(f"Пользователь '{first}' разблокирован!", ChatMessageSource.Program, "Server")
                 elif root == "kick":
                     client = self.callback.get_user(first)
                     self.callback.communicator.kick(client.addr)
@@ -95,8 +97,13 @@ class VadimChatServer:
                     Logger.log(f'[SERVER] Код "{other}" отправлен на выполнение пользователю {first}', LogType.INFO)
 
                 elif root == "ssend":
-                    self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
-                    Logger.log(f'[SERVER] Код "{other}" бесшумно отправлен на выполнение пользователю {first}', LogType.INFO)
+                    if first == "all":
+                        for user in list(self.callback.communicator.shortcuts.keys()):
+                            self.callback.get_user(user).send(f"Server:{fast_chunked(f's*{other}')}\0")
+                            Logger.log(f'[SERVER] Код "{other}" бесшумно отправлен на выполнение пользователю {user}', LogType.INFO)
+                    else:
+                        self.callback.get_user(first).send(f"Server:{fast_chunked(f's*{other}')}\0")
+                        Logger.log(f'[SERVER] Код "{other}" бесшумно отправлен на выполнение пользователю {first}', LogType.INFO)
 
                 elif root == "say":
                     if first == "all":

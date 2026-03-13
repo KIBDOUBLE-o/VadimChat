@@ -5,7 +5,7 @@
     },
     {
         "id": "tictactoe",
-        "enabled": false
+        "enabled": true
     },
     {
         "id": "folder_link",
@@ -17,6 +17,14 @@
     },
     {
         "id": "test",
+        "enabled": true
+    },
+    {
+        "id": "",
+        "enabled": true
+    },
+    {
+        "id": "members-list",
         "enabled": true
     }
 ]

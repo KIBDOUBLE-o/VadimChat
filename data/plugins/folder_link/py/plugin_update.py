@@ -140,4 +140,4 @@ if self.folderlink:
     # Сохраняем обновлённое состояние всех папок
     self.callback.save_data("folderlink/states", states)
 
-    print(f"[OK] Plugin update: {updated} folders updated! total: {len(self.folders)}")
+    #print(f"[OK] Plugin update: {updated} folders updated! total: {len(self.folders)}")

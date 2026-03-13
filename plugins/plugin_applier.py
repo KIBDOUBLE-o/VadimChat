@@ -1,5 +1,5 @@
-from logger.log_type import LogType
-from logger.logger import Logger
+from debugging.log_type import LogType
+from debugging.logger import Logger
 from plugins.plugin import Plugin
 from traceback import format_exc
 

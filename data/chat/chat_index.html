@@ -1,10 +1,17 @@
 <!-- source:body_main -->
 
 <button id="minimizeBtn">−</button>
+<button id="silenceModeBtn">s</button>
+<button id="statsBtn" style="display: none;">D</button>
+
+<div id="stats" class="stats-panel" style="display:none">
+    <h4>Stats Panel</h4>
+    <div id="statsTree" class="stats-tree"></div>
+</div>
 
 <div id="menu">
-    <h2>Vadim Chat</h2>
-    <div id="versionText">ERROR</div>
+    <h2 id="title">Vadim Chat</h2>
+    <div id="versionText">Unknown version</div>
     <button id="createBtn">Создать комнату</button>
     <button id="joinBtn">Подключиться</button>
     <button id="reconnectBtn">Подключиться к недавней</button>
@@ -16,6 +23,10 @@
         <button id="errorsTopBtn" class="top-button" data-tooltip="Ошибки плагинов">🐞</button>
     </div>
     <!-- source:body_menu -->
+    <div id="stateBadge" class="state-badge">
+        <div id="stateText">state</div>
+        <div id="statePointer" class="offline"></div>
+    </div>
 </div>
 
 <div id="errorsMenu" class="window-container" style="display:none;">
@@ -96,6 +107,7 @@
     <input type="text" id="joinKey" placeholder="Введите ключ">
     <input type="text" id="joinName" placeholder="Введите имя">
     <button id="connectBtn">Подключиться</button>
+    <button id="joinFormBackBtn" style="background: linear-gradient(145deg, #d9534f, #b52a2a)">Назад</button>
 </div>
 
 <div id="chat" style="display:none;">

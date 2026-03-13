@@ -4,6 +4,7 @@
     "author": "Dev",
     "version": "1.0.0",
     "description": "Позволяет создавать общие папки с другими пользователями",
+    "chat_version": "1.3",
     "py": [
         {
             "hook": "server.command_proceed",

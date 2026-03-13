@@ -4,6 +4,7 @@
     "author": "Deep Seek",
     "version": "1.0.0",
     "description": "Многопользовательская игра в крестики-нолики прямо в чате",
+    "chat_version": "1.3",
     "py": [
         {
             "hook": "server.command_proceed",

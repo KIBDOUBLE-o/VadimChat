@@ -43,6 +43,7 @@ hooks:
         server.client_processing:after_msg_work
         server.client_processing:command_proceed
         server.on_client_disconnect:pre
+        server.on_client_net_operation
         server.command_proceed
         server.plugin_update
     client:
@@ -59,3 +60,5 @@ hooks:
         crh.update_received_messages:end
     chat:
         chat.send
+        chat.just_update
+        chat.rare_update

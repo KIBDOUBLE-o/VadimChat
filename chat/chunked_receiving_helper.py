@@ -53,14 +53,14 @@ class ChunkedReceiverHelper:
                     self.callback.log(decode_triplex64(full_message), ChatMessageSource.Other, sender)
                 else:
                     self.callback.log(full_message, ChatMessageSource.Other, sender)
-                if self.callback.is_hidden:
+                if self.callback.is_hidden and not self.callback.silence_mode:
                     Notificator.notify(f"{sender} пишет", payload)
-                if self.callback.communicator.is_server: self.callback.make_history_impact(sender, full_message)
+                # if self.callback.communicator.is_server: self.callback.make_history_impact(sender, full_message)
             elif data_type == "[file]":
                 save_dir = f"data/shared_assets/"
                 save_path = save_base64_to_file(full_message, save_dir, source)
                 self.callback.log_file(save_path, ChatMessageSource.Other, sender)
-                if self.callback.is_hidden:
+                if self.callback.is_hidden and not self.callback.silence_mode:
                     Notificator.notify(f"{sender} прислал файл", save_path.split("/")[-1])
             elif data_type == '[button]':
                 data = full_message.split(';')
@@ -77,13 +77,13 @@ class ChunkedReceiverHelper:
                     self.callback.log(decode_triplex64(payload), ChatMessageSource.Other, sender)
                 else:
                     self.callback.log(payload, ChatMessageSource.Other, sender)
-                if self.callback.is_hidden:
+                if self.callback.is_hidden and not self.callback.silence_mode:
                     Notificator.notify(f"{sender} пишет", payload)
             elif data_type == "[file]":
                 save_dir = f"data/shared_assets/"
                 save_path = save_base64_to_file(payload, save_dir, source)
                 self.callback.log_file(save_path, ChatMessageSource.Other, sender)
-                if self.callback.is_hidden:
+                if self.callback.is_hidden and not self.callback.silence_mode:
                     Notificator.notify(f"{sender} прислал файл", save_path.split("/")[-1])
             elif data_type == '[button]':
                 data = full_message.split(';')

@@ -10,8 +10,8 @@ from appdata import AppData
 from chat.chat_message_source import ChatMessageSource
 from chat.chunked_receiving_helper import ChunkedReceiverHelper
 from chunked.chunked_data import ChunkedData
-from logger.log_type import LogType
-from logger.logger import Logger
+from debugging.log_type import LogType
+from debugging.logger import Logger
 from networking.client import Client
 from notificator import Notificator
 from plugins.plugin_applier import PluginApplier

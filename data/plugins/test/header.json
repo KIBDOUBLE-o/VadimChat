@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "description": "nothing",
     "dependencies": [],
+    "chat_version": "1.3",
     "py": [
         {
             "hook": "ui.on_loaded",

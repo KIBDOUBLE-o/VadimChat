@@ -1,0 +1,40 @@
+{
+    "id": "members-list",
+    "display_name": "Members List",
+    "author": "Dev",
+    "version": "1.0.0",
+    "description": "Добавляет возможность просматривать участников чата",
+    "chat_version": "1.3",
+    "py": [
+        {
+            "hook": "chat.rare_update",
+            "path": "py/update_list"
+        },
+        {
+            "hook": "crh.update_received_messages:end",
+            "path": "py/crh"
+        },
+        {
+            "hook": "",
+            "path": "py/utils"
+        }
+    ],
+    "webview": [
+        {
+            "source": "body_chat",
+            "path": "webview/button.html"
+        },
+        {
+            "source": "body_main",
+            "path": "webview/main.html"
+        },
+        {
+            "source": "script_main",
+            "path": "webview/member_list.js"
+        },
+        {
+            "source": "style_main",
+            "path": "webview/member_list.css"
+        }
+    ]
+}

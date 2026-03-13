@@ -1,0 +1,164 @@
+#membersGame {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(43, 43, 43, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #007acc;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 10000;
+    box-shadow: 0 0 30px rgba(0, 122, 204, 0.5);
+    min-width: 300px;
+    max-width: 400px;
+    max-height: 80vh;
+    display: none;
+    flex-direction: column;
+}
+
+#membersGame h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 18px;
+}
+
+#membersCount {
+    color: #007acc;
+}
+
+/* ===== Список ===== */
+#membersList {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 15px 0;
+}
+
+#membersList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#membersList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#membersList::-webkit-scrollbar-thumb {
+    background: #007acc;
+    border-radius: 3px;
+}
+
+/* ===== Карточка участника ===== */
+.member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.member-item:hover {
+    background: rgba(80, 83, 85, 0.5);
+    border-color: #007acc;
+}
+
+.member-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    border: 2px solid;
+}
+
+.member-avatar.admin {
+    background: rgba(255, 68, 68, 0.2);
+    border-color: #ff4444;
+    text-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
+}
+
+.member-avatar.user {
+    background: rgba(68, 255, 68, 0.2);
+    border-color: #44ff44;
+    text-shadow: 0 0 8px rgba(68, 255, 68, 0.5);
+}
+
+.member-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-badge {
+    font-size: 9px;
+    background: linear-gradient(145deg, #d9534f, #b52a2a);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.member-ip {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+    font-family: 'Courier New', monospace;
+}
+
+.member-status {
+    width: 8px;
+    height: 8px;
+    background: #44ff44;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(68, 255, 68, 0.5);
+}
+
+/* ===== Пустой список ===== */
+.members-empty {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ===== Кнопки управления ===== */
+#membersControls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#closeMembers {
+    background: linear-gradient(145deg, #d9534f, #b52a2a);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#closeMembers:hover {
+    background: linear-gradient(145deg, #e06a6a, #c02f2f);
+    transform: scale(1.05);
+}
